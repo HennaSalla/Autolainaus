@@ -130,7 +130,8 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
             self.ui.portLineEdit.setText(self.currentSettings['port'])
             self.ui.databaseLineEdit.setText(self.currentSettings['database'])
             self.ui.userLineEdit.setText(self.currentSettings['userName'])
-            self.ui.paswordLineEdit.setText(self.currentSettings['password'])
+            plaintextPassword = cipher.decryptString(self.currentSettings['password'])
+            self.ui.paswordLineEdit.setText(plaintextPassword)
         except Exception as e:
             self.openInfo()
         
