@@ -177,7 +177,9 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
         with open('settings.json', 'wt') as settingsFile:
             settingsFile.write(jsonData)
 
-    
+        # Suljetaan dialogin ikkuna
+        self.close()
+
     # Avataan MessageBox, jossa kerrotaan että tehdää uusi asetustiedosto
     def openInfo(self):
         msgBox = QtWidgets.QMessageBox()
@@ -213,5 +215,6 @@ if __name__ == "__main__":
 
     # Käynnistetään sovellus ja tapahtumienkäsittelijä
     app.exec()
+    .
 
     
