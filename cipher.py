@@ -95,3 +95,4 @@ if __name__ == "__main__":
     print('Salakirjoitettuna se on:', sala)
     purettu = decryptString(sala)
     print('Purettuna se on:', purettu)
+.
