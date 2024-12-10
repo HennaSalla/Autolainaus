@@ -23,7 +23,7 @@ settingFile2.close() # Suljettava kirjoituksen jälkeen
 # Avataan uudelleen kirjoituksen jälkeen
 settingsFile3 = open('settings.txt', 'rt')
 print(settingsFile3.read())
-"""
+""".
 """
 asetukset = {} # Luodaan muuttuja sanakirjaa varten, tyhjä dict
 # Luetaan tiedosto with-rakenteen avulla. Tiedosto suljetaan ja muisti tyhjennetään operaation päätteeksi
