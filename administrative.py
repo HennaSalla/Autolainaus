@@ -53,10 +53,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             
             # TODO: Poista print-komennot, ei tarvita enää!   
             encryptedPassword = self.currentSettings['password']
-            print('Tietokannan salattu salasana: ', encryptedPassword)
             
             plainPassword = cipher.decryptString(encryptedPassword)
-            print('Selväkielinen salasana on', plainPassword)
             
             
         except Exception as e:
