@@ -52,5 +52,5 @@ class Ui_Dialog(object):
 "<p style=\" margin-top:0px"
                         "; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt; font-style:italic;\">TiVi20oa:n opiskelijat</span></p></body></html>", None))
     # retranslateUi
-    
+    .
 
