@@ -19,6 +19,6 @@ class DbConnection():
         self.databaseName = settings['database']
         self.userName = settings['username']
         self.password = settings['password']
-    .
+    
 
     
