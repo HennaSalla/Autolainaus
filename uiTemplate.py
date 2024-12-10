@@ -60,5 +60,5 @@ window.show()
 
 # Käynnistetään sovellus ja tapahtumienkäsittelijä
 app.exec()
-
+.
     
