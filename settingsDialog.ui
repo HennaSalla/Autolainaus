@@ -27,7 +27,7 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>8</pointsize>
+     <pointsize>9</pointsize>
      <bold>true</bold>
     </font>
    </property>
@@ -104,7 +104,7 @@ color: rgb(255, 255, 255);</string>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="paswordLineEdit">
+     <widget class="QLineEdit" name="passwordLineEdit">
       <property name="font">
        <font>
         <pointsize>11</pointsize>
@@ -126,7 +126,7 @@ color: rgb(255, 255, 255);</string>
      <x>10</x>
      <y>10</y>
      <width>86</width>
-     <height>141</height>
+     <height>151</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -203,9 +203,12 @@ color: rgb(255, 255, 255);</string>
    </property>
    <property name="font">
     <font>
-     <pointsize>8</pointsize>
-     <bold>false</bold>
+     <pointsize>9</pointsize>
+     <bold>true</bold>
     </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
     <string>Sulje</string>

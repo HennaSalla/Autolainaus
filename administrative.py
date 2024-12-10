@@ -129,7 +129,7 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
             self.ui.databaseLineEdit.setText(self.currentSettings['database'])
             self.ui.userLineEdit.setText(self.currentSettings['userName'])
             plaintextPassword = cipher.decryptString(self.currentSettings['password'])
-            self.ui.paswordLineEdit.setText(plaintextPassword)
+            self.ui.passwordLineEdit.setText(plaintextPassword)
         except Exception as e:
             self.openInfo()
         
@@ -139,6 +139,9 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
 
         # Kun Tallenna-painiketta on klikattu, kutsutaan saveToJsonFile-metodia
         self.ui.saveSettingspushButton.clicked.connect(self.saveToJsonFile)
+
+        # Sulje painikkeen toiminnot
+        self.ui.closePushButton.clicked.connect(self.closeSettingsDialog)
     
     # OHJELMOIDUT SLOTIT (Luokan metodit)
     # -----------------------------------
@@ -153,7 +156,7 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
         userName = self.ui.userLineEdit.text()
 
         # Muutetaan merkkijono tavumuotoon (byte, merkistö UTF-8)
-        plainTextPassword = self.ui.paswordLineEdit.text()
+        plainTextPassword = self.ui.passwordLineEdit.text()
        
         # Salataan ja muunnetaan tavalliseksi merkkijonoksi, jotta JSON-tallennus onnistuu
         encryptedPassword = cipher.encryptString(plainTextPassword)
@@ -176,6 +179,9 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
             settingsFile.write(jsonData)
 
         # Suljetaan dialogin ikkuna
+        self.close()
+
+    def closeSettingsDialog(self):
         self.close()
 
     # Avataan MessageBox, jossa kerrotaan että tehdää uusi asetustiedosto

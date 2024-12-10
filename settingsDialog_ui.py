@@ -29,7 +29,7 @@ class Ui_Dialog(object):
         self.saveSettingspushButton.setObjectName(u"saveSettingspushButton")
         self.saveSettingspushButton.setGeometry(QRect(210, 170, 81, 23))
         font = QFont()
-        font.setPointSize(8)
+        font.setPointSize(9)
         font.setBold(True)
         self.saveSettingspushButton.setFont(font)
         self.saveSettingspushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
@@ -67,16 +67,16 @@ class Ui_Dialog(object):
 
         self.verticalLayout.addWidget(self.userLineEdit)
 
-        self.paswordLineEdit = QLineEdit(self.layoutWidget)
-        self.paswordLineEdit.setObjectName(u"paswordLineEdit")
-        self.paswordLineEdit.setFont(font1)
-        self.paswordLineEdit.setEchoMode(QLineEdit.EchoMode.PasswordEchoOnEdit)
+        self.passwordLineEdit = QLineEdit(self.layoutWidget)
+        self.passwordLineEdit.setObjectName(u"passwordLineEdit")
+        self.passwordLineEdit.setFont(font1)
+        self.passwordLineEdit.setEchoMode(QLineEdit.EchoMode.PasswordEchoOnEdit)
 
-        self.verticalLayout.addWidget(self.paswordLineEdit)
+        self.verticalLayout.addWidget(self.passwordLineEdit)
 
         self.layoutWidget_2 = QWidget(Dialog)
         self.layoutWidget_2.setObjectName(u"layoutWidget_2")
-        self.layoutWidget_2.setGeometry(QRect(10, 10, 86, 141))
+        self.layoutWidget_2.setGeometry(QRect(10, 10, 86, 151))
         self.verticalLayout_2 = QVBoxLayout(self.layoutWidget_2)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -115,10 +115,8 @@ class Ui_Dialog(object):
         self.closePushButton = QPushButton(Dialog)
         self.closePushButton.setObjectName(u"closePushButton")
         self.closePushButton.setGeometry(QRect(120, 170, 75, 24))
-        font3 = QFont()
-        font3.setPointSize(8)
-        font3.setBold(False)
-        self.closePushButton.setFont(font3)
+        self.closePushButton.setFont(font)
+        self.closePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
         self.retranslateUi(Dialog)
 
@@ -144,7 +142,7 @@ class Ui_Dialog(object):
         self.userLineEdit.setToolTip(QCoreApplication.translate("Dialog", u"<html><head/><body><p><span style=\" font-size:10pt;\">Sovelluksen k\u00e4ytt\u00e4j\u00e4tunnus</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
 #if QT_CONFIG(tooltip)
-        self.paswordLineEdit.setToolTip(QCoreApplication.translate("Dialog", u"<html><head/><body><p><span style=\" font-size:10pt;\">Salasana</span></p></body></html>", None))
+        self.passwordLineEdit.setToolTip(QCoreApplication.translate("Dialog", u"<html><head/><body><p><span style=\" font-size:10pt;\">Salasana</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.ServerLabel.setText(QCoreApplication.translate("Dialog", u"Palvelin", None))
         self.portLabel.setText(QCoreApplication.translate("Dialog", u"Portti", None))

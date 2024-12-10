@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="windowIcon">
+   <iconset theme="preferences-desktop-accessibility"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
@@ -27,7 +30,7 @@
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="studentTab">
      <property name="cursor">
@@ -87,14 +90,13 @@
       <property name="geometry">
        <rect>
         <x>310</x>
-        <y>130</y>
+        <y>140</y>
         <width>71</width>
         <height>23</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -109,13 +111,13 @@ color: rgb(255, 255, 255);</string>
        <string>Tallenna</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>130</x>
         <y>10</y>
         <width>171</width>
-        <height>146</height>
+        <height>156</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="studentInputsVerticalLayout">
@@ -166,13 +168,13 @@ color: rgb(255, 255, 255);</string>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>20</x>
         <y>10</y>
         <width>101</width>
-        <height>141</height>
+        <height>161</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="studentLabelsVerticalLayout">
@@ -252,7 +254,7 @@ color: rgb(255, 255, 255);</string>
         <x>10</x>
         <y>0</y>
         <width>101</width>
-        <height>141</height>
+        <height>161</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="vehicleLabelsVerticalLayout">
@@ -324,7 +326,7 @@ color: rgb(255, 255, 255);</string>
         <x>120</x>
         <y>0</y>
         <width>169</width>
-        <height>146</height>
+        <height>156</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="vehicleInputsVerticalLayout">
@@ -379,14 +381,13 @@ color: rgb(255, 255, 255);</string>
       <property name="geometry">
        <rect>
         <x>300</x>
-        <y>120</y>
+        <y>130</y>
         <width>91</width>
         <height>23</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -405,14 +406,13 @@ color: rgb(255, 255, 255);</string>
       <property name="geometry">
        <rect>
         <x>300</x>
-        <y>90</y>
+        <y>100</y>
         <width>91</width>
         <height>23</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -483,14 +483,13 @@ color: rgb(255, 255, 255);</string>
       <property name="geometry">
        <rect>
         <x>300</x>
-        <y>50</y>
+        <y>60</y>
         <width>81</width>
         <height>23</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -548,13 +547,13 @@ color: rgb(255, 255, 255);</string>
        <string>Tallennetut ryhmät</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>120</x>
         <y>20</y>
         <width>169</width>
-        <height>56</height>
+        <height>60</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -578,13 +577,13 @@ color: rgb(255, 255, 255);</string>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>30</x>
         <y>20</y>
         <width>84</width>
-        <height>51</height>
+        <height>61</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -752,7 +751,6 @@ color: rgb(255, 255, 255);</string>
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
         <bold>true</bold>
        </font>
       </property>
@@ -836,7 +834,7 @@ color: rgb(255, 255, 255);</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>33</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuAsetukset">

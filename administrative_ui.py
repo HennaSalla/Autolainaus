@@ -27,6 +27,8 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(800, 600)
+        icon = QIcon(QIcon.fromTheme(u"preferences-desktop-accessibility"))
+        MainWindow.setWindowIcon(icon)
         self.actionMuokkaa = QAction(MainWindow)
         self.actionMuokkaa.setObjectName(u"actionMuokkaa")
         self.actionTietoja_ohjelmasta = QAction(MainWindow)
@@ -55,20 +57,20 @@ class Ui_MainWindow(object):
         self.registeredPersonsLabel.setGeometry(QRect(20, 180, 131, 16))
         self.savePersonPushButton = QPushButton(self.studentTab)
         self.savePersonPushButton.setObjectName(u"savePersonPushButton")
-        self.savePersonPushButton.setGeometry(QRect(310, 130, 71, 23))
+        self.savePersonPushButton.setGeometry(QRect(310, 140, 71, 23))
         font = QFont()
         font.setBold(True)
         self.savePersonPushButton.setFont(font)
         self.savePersonPushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.savePersonPushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
 "color: rgb(255, 255, 255);")
-        self.widget = QWidget(self.studentTab)
-        self.widget.setObjectName(u"widget")
-        self.widget.setGeometry(QRect(130, 10, 171, 146))
-        self.studentInputsVerticalLayout = QVBoxLayout(self.widget)
+        self.layoutWidget = QWidget(self.studentTab)
+        self.layoutWidget.setObjectName(u"layoutWidget")
+        self.layoutWidget.setGeometry(QRect(130, 10, 171, 156))
+        self.studentInputsVerticalLayout = QVBoxLayout(self.layoutWidget)
         self.studentInputsVerticalLayout.setObjectName(u"studentInputsVerticalLayout")
         self.studentInputsVerticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.ssnLineEdit = QLineEdit(self.widget)
+        self.ssnLineEdit = QLineEdit(self.layoutWidget)
         self.ssnLineEdit.setObjectName(u"ssnLineEdit")
         font1 = QFont()
         font1.setPointSize(11)
@@ -76,37 +78,37 @@ class Ui_MainWindow(object):
 
         self.studentInputsVerticalLayout.addWidget(self.ssnLineEdit)
 
-        self.firstNameLineEdit = QLineEdit(self.widget)
+        self.firstNameLineEdit = QLineEdit(self.layoutWidget)
         self.firstNameLineEdit.setObjectName(u"firstNameLineEdit")
         self.firstNameLineEdit.setFont(font1)
 
         self.studentInputsVerticalLayout.addWidget(self.firstNameLineEdit)
 
-        self.lastNameLineEdit = QLineEdit(self.widget)
+        self.lastNameLineEdit = QLineEdit(self.layoutWidget)
         self.lastNameLineEdit.setObjectName(u"lastNameLineEdit")
         self.lastNameLineEdit.setFont(font1)
 
         self.studentInputsVerticalLayout.addWidget(self.lastNameLineEdit)
 
-        self.groupComboBox = QComboBox(self.widget)
+        self.groupComboBox = QComboBox(self.layoutWidget)
         self.groupComboBox.setObjectName(u"groupComboBox")
         self.groupComboBox.setFont(font1)
 
         self.studentInputsVerticalLayout.addWidget(self.groupComboBox)
 
-        self.vehicleClassLineEdit = QLineEdit(self.widget)
+        self.vehicleClassLineEdit = QLineEdit(self.layoutWidget)
         self.vehicleClassLineEdit.setObjectName(u"vehicleClassLineEdit")
         self.vehicleClassLineEdit.setFont(font1)
 
         self.studentInputsVerticalLayout.addWidget(self.vehicleClassLineEdit)
 
-        self.widget1 = QWidget(self.studentTab)
-        self.widget1.setObjectName(u"widget1")
-        self.widget1.setGeometry(QRect(20, 10, 101, 141))
-        self.studentLabelsVerticalLayout = QVBoxLayout(self.widget1)
+        self.layoutWidget1 = QWidget(self.studentTab)
+        self.layoutWidget1.setObjectName(u"layoutWidget1")
+        self.layoutWidget1.setGeometry(QRect(20, 10, 101, 161))
+        self.studentLabelsVerticalLayout = QVBoxLayout(self.layoutWidget1)
         self.studentLabelsVerticalLayout.setObjectName(u"studentLabelsVerticalLayout")
         self.studentLabelsVerticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.ssnLabel = QLabel(self.widget1)
+        self.ssnLabel = QLabel(self.layoutWidget1)
         self.ssnLabel.setObjectName(u"ssnLabel")
         font2 = QFont()
         font2.setPointSize(10)
@@ -114,25 +116,25 @@ class Ui_MainWindow(object):
 
         self.studentLabelsVerticalLayout.addWidget(self.ssnLabel)
 
-        self.firstNameLabel = QLabel(self.widget1)
+        self.firstNameLabel = QLabel(self.layoutWidget1)
         self.firstNameLabel.setObjectName(u"firstNameLabel")
         self.firstNameLabel.setFont(font2)
 
         self.studentLabelsVerticalLayout.addWidget(self.firstNameLabel)
 
-        self.lastNameLabel = QLabel(self.widget1)
+        self.lastNameLabel = QLabel(self.layoutWidget1)
         self.lastNameLabel.setObjectName(u"lastNameLabel")
         self.lastNameLabel.setFont(font2)
 
         self.studentLabelsVerticalLayout.addWidget(self.lastNameLabel)
 
-        self.groupLabel = QLabel(self.widget1)
+        self.groupLabel = QLabel(self.layoutWidget1)
         self.groupLabel.setObjectName(u"groupLabel")
         self.groupLabel.setFont(font2)
 
         self.studentLabelsVerticalLayout.addWidget(self.groupLabel)
 
-        self.vehicleClassLabel = QLabel(self.widget1)
+        self.vehicleClassLabel = QLabel(self.layoutWidget1)
         self.vehicleClassLabel.setObjectName(u"vehicleClassLabel")
         self.vehicleClassLabel.setFont(font2)
 
@@ -142,37 +144,37 @@ class Ui_MainWindow(object):
         self.vehicleTab = QWidget()
         self.vehicleTab.setObjectName(u"vehicleTab")
         self.vehicleTab.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
-        self.layoutWidget = QWidget(self.vehicleTab)
-        self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(10, 0, 101, 141))
-        self.vehicleLabelsVerticalLayout = QVBoxLayout(self.layoutWidget)
+        self.layoutWidget2 = QWidget(self.vehicleTab)
+        self.layoutWidget2.setObjectName(u"layoutWidget2")
+        self.layoutWidget2.setGeometry(QRect(10, 0, 101, 161))
+        self.vehicleLabelsVerticalLayout = QVBoxLayout(self.layoutWidget2)
         self.vehicleLabelsVerticalLayout.setObjectName(u"vehicleLabelsVerticalLayout")
         self.vehicleLabelsVerticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.numberPlateLabel = QLabel(self.layoutWidget)
+        self.numberPlateLabel = QLabel(self.layoutWidget2)
         self.numberPlateLabel.setObjectName(u"numberPlateLabel")
         self.numberPlateLabel.setFont(font2)
 
         self.vehicleLabelsVerticalLayout.addWidget(self.numberPlateLabel)
 
-        self.manufacturerLabel = QLabel(self.layoutWidget)
+        self.manufacturerLabel = QLabel(self.layoutWidget2)
         self.manufacturerLabel.setObjectName(u"manufacturerLabel")
         self.manufacturerLabel.setFont(font2)
 
         self.vehicleLabelsVerticalLayout.addWidget(self.manufacturerLabel)
 
-        self.modelLabel = QLabel(self.layoutWidget)
+        self.modelLabel = QLabel(self.layoutWidget2)
         self.modelLabel.setObjectName(u"modelLabel")
         self.modelLabel.setFont(font2)
 
         self.vehicleLabelsVerticalLayout.addWidget(self.modelLabel)
 
-        self.modelYearLabel = QLabel(self.layoutWidget)
+        self.modelYearLabel = QLabel(self.layoutWidget2)
         self.modelYearLabel.setObjectName(u"modelYearLabel")
         self.modelYearLabel.setFont(font2)
 
         self.vehicleLabelsVerticalLayout.addWidget(self.modelYearLabel)
 
-        self.capacityLabel = QLabel(self.layoutWidget)
+        self.capacityLabel = QLabel(self.layoutWidget2)
         self.capacityLabel.setObjectName(u"capacityLabel")
         self.capacityLabel.setFont(font2)
 
@@ -180,7 +182,7 @@ class Ui_MainWindow(object):
 
         self.layoutWidget_2 = QWidget(self.vehicleTab)
         self.layoutWidget_2.setObjectName(u"layoutWidget_2")
-        self.layoutWidget_2.setGeometry(QRect(120, 0, 169, 146))
+        self.layoutWidget_2.setGeometry(QRect(120, 0, 169, 156))
         self.vehicleInputsVerticalLayout = QVBoxLayout(self.layoutWidget_2)
         self.vehicleInputsVerticalLayout.setObjectName(u"vehicleInputsVerticalLayout")
         self.vehicleInputsVerticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -216,14 +218,14 @@ class Ui_MainWindow(object):
 
         self.saveVehiclePushButton = QPushButton(self.vehicleTab)
         self.saveVehiclePushButton.setObjectName(u"saveVehiclePushButton")
-        self.saveVehiclePushButton.setGeometry(QRect(300, 120, 91, 23))
+        self.saveVehiclePushButton.setGeometry(QRect(300, 130, 91, 23))
         self.saveVehiclePushButton.setFont(font)
         self.saveVehiclePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.saveVehiclePushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
 "color: rgb(255, 255, 255);")
         self.printBarcodePushButton = QPushButton(self.vehicleTab)
         self.printBarcodePushButton.setObjectName(u"printBarcodePushButton")
-        self.printBarcodePushButton.setGeometry(QRect(300, 90, 91, 23))
+        self.printBarcodePushButton.setGeometry(QRect(300, 100, 91, 23))
         self.printBarcodePushButton.setFont(font)
         self.printBarcodePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.printBarcodePushButton.setStyleSheet(u"background-color: rgb(220, 162, 25);\n"
@@ -246,7 +248,7 @@ class Ui_MainWindow(object):
         self.tab.setObjectName(u"tab")
         self.pushButton = QPushButton(self.tab)
         self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setGeometry(QRect(300, 50, 81, 23))
+        self.pushButton.setGeometry(QRect(300, 60, 81, 23))
         self.pushButton.setFont(font)
         self.pushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
 "color: rgb(255, 255, 255);")
@@ -263,37 +265,37 @@ class Ui_MainWindow(object):
         self.label_3 = QLabel(self.tab)
         self.label_3.setObjectName(u"label_3")
         self.label_3.setGeometry(QRect(30, 100, 101, 16))
-        self.widget2 = QWidget(self.tab)
-        self.widget2.setObjectName(u"widget2")
-        self.widget2.setGeometry(QRect(120, 20, 169, 56))
-        self.verticalLayout = QVBoxLayout(self.widget2)
+        self.layoutWidget3 = QWidget(self.tab)
+        self.layoutWidget3.setObjectName(u"layoutWidget3")
+        self.layoutWidget3.setGeometry(QRect(120, 20, 169, 60))
+        self.verticalLayout = QVBoxLayout(self.layoutWidget3)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.lineEdit = QLineEdit(self.widget2)
+        self.lineEdit = QLineEdit(self.layoutWidget3)
         self.lineEdit.setObjectName(u"lineEdit")
         self.lineEdit.setFont(font1)
 
         self.verticalLayout.addWidget(self.lineEdit)
 
-        self.lineEdit_2 = QLineEdit(self.widget2)
+        self.lineEdit_2 = QLineEdit(self.layoutWidget3)
         self.lineEdit_2.setObjectName(u"lineEdit_2")
         self.lineEdit_2.setFont(font1)
 
         self.verticalLayout.addWidget(self.lineEdit_2)
 
-        self.widget3 = QWidget(self.tab)
-        self.widget3.setObjectName(u"widget3")
-        self.widget3.setGeometry(QRect(30, 20, 84, 51))
-        self.verticalLayout_2 = QVBoxLayout(self.widget3)
+        self.layoutWidget4 = QWidget(self.tab)
+        self.layoutWidget4.setObjectName(u"layoutWidget4")
+        self.layoutWidget4.setGeometry(QRect(30, 20, 84, 61))
+        self.verticalLayout_2 = QVBoxLayout(self.layoutWidget4)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.label = QLabel(self.widget3)
+        self.label = QLabel(self.layoutWidget4)
         self.label.setObjectName(u"label")
         self.label.setFont(font2)
 
         self.verticalLayout_2.addWidget(self.label)
 
-        self.label_2 = QLabel(self.widget3)
+        self.label_2 = QLabel(self.layoutWidget4)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setFont(font2)
 
@@ -355,7 +357,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 800, 21))
+        self.menubar.setGeometry(QRect(0, 0, 800, 33))
         self.menuAsetukset = QMenu(self.menubar)
         self.menuAsetukset.setObjectName(u"menuAsetukset")
         MainWindow.setMenuBar(self.menubar)
@@ -369,7 +371,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
