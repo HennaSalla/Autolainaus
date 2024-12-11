@@ -11,7 +11,7 @@ except Exception as e:
 finally:
     if connection:
         cursor.close()
-        connection.close()
+        connection.close() 
 
 try:
     connectionString = "dbname=testi user=user password=salasana host=localhost port=5432"
