@@ -67,7 +67,7 @@ class DbConnection():
             for column in columnList:
                 columns += column + ', '
             # TODO: Tee tähän toiminto, joka siistii viimeisen, :n ja välilyönnin pois merkkijonosta
-            sqlClause = f'INSERT INTO {table} ({columnList}) VALUES ({valueList})'
+            sqlClause = f'INSERT INTO {table} ({columns}) VALUES ({valueList})'
             print(sqlClause)
 
             # Suoritetaan SQL-lause
