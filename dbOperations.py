@@ -28,7 +28,7 @@ class DbConnection():
         self.password = settings['password']
 
         # Yhteysmerkkijono
-        self.connectionString = f'database="{self.databaseName}", user="{self.userName}", password="{self.password}", host="{self.server}", port="{self.port}"'
+        self.connectionString = f"dbname={self.databaseName} user={self.userName} password={self.password} host={self.server} port={self.port}"
 
         print('Yhteysmerkkijono on:', self.connectionString)
 
@@ -52,7 +52,14 @@ class DbConnection():
         # Luetaan kaikki avaimet ja arvot ja lisätään ne listoihin
         for key in keys:
             columns += key + ', ' # Lisätään pilkku
-            values += data[key] + ', '
+            rawValue = data[key]
+
+            # Lisätään puolilainausmerkit, jos kyseessä on merkkijono
+            if isinstance(rawValue, str):
+                value = f'\'{rawValue}\'' # \' mahdollistaa puolilainaus merkin lisäämisen
+            else:
+                value =rawValue
+            values += value + ', ' # Lisätään arvo sekä pilkku ja välilyönti
 
         # Poistetaan sarakkeista ja arvoista viimeinen pilkku ja välilyönti
         columns = columns[:-2]
