@@ -30,7 +30,6 @@ class DbConnection():
         # Yhteysmerkkijono
         self.connectionString = f"dbname={self.databaseName} user={self.userName} password={self.password} host={self.server} port={self.port}"
 
-        print('Yhteysmerkkijono on:', self.connectionString)
 
     # Metodi tietojen lisäämiseen (INSERT)
     def addToTable(self, table: str, data: dict) -> str:
