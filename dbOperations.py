@@ -32,15 +32,12 @@ class DbConnection():
 
 
     # Metodi tietojen lisäämiseen (INSERT)
-    def addToTable(self, table: str, data: dict) -> str:
+    def addToTable(self, table: str, data: dict) -> None:
         """Inserts a record (row) to a table according to a dictionary containing field names (columns) as keys and values
 
         Args:
             table (str): Name of the table
             data (dict): Field names and values
-
-        Returns:
-            str: Information about successfull operation or an error message
         """
 
         # Muodostetaan lista sarakkeiden (kenttien) nimistä ja arvoista SQL lausetta varten
@@ -57,7 +54,7 @@ class DbConnection():
             if isinstance(rawValue, str):
                 value = f'\'{rawValue}\'' # \' mahdollistaa puolilainaus merkin lisäämisen
             else:
-                value =rawValue
+                value = f'{rawValue}'
             values += value + ', ' # Lisätään arvo sekä pilkku ja välilyönti
 
         # Poistetaan sarakkeista ja arvoista viimeinen pilkku ja välilyönti
@@ -84,21 +81,22 @@ class DbConnection():
             # Vahvistetaan tapahtu,a (transaction)
             currentConnection.commit()
 
+        # Jos tapahtuu virhe, välitetään se luokaa käytävälle ohjelmalle
         except (Exception, psycopg2.Error) as e:
-            message = 'Tietokantayhteyden muodostamisessa tapahtui virhe: ' + str(e)
-            return message
+            raise e
         
         finally:
-            if message == '':
-                message = f'Tietue lisätiin tauluun {table}'
-
             # Selvitetään muodostuuko yhteisolio
             if currentConnection:
                 cursor.close() # Tuhotaan kursori
                 currentConnection.close() # Tuhotaan yhteys
 
-            return message
-        
+    # TODO: Tee metodi tietojen lukemiseen
+
+    # TODO: Tee metodi tietojen muokkaamiseen
+
+    # TODO: Tee metodi tietueen poistamiseen
+
 if __name__ == "__main__":
     testDictionary = {'server': '127.0.0.1',
                       'port' : '5432',
@@ -110,7 +108,5 @@ if __name__ == "__main__":
                        'sukunimi' : 'Esimerkki'}
     
     dbConnection = DbConnection(testDictionary)
-
-    print('Yhteysmerkkijono on:', dbConnection.connectionString)
 
     dbConnection.addToTable('testitaulu', tableDictionary)

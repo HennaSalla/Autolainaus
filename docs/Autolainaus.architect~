@@ -74,10 +74,7 @@
     <column id="COL18" populated="true" UUID="04e94170-4fcd-4914-a99f-d87f806a19e3" autoIncrement="false" autoIncrementSequenceName="auto_malli_seq" defaultValue="" name="Malli" nullable="0" physicalName="malli" precision="20" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL19" populated="true" UUID="1f24fb70-a33d-4c45-8b29-353c51cd44e2" autoIncrement="false" autoIncrementSequenceName="auto_henkilomaara_seq" defaultValue="" name="Henkilomaara" nullable="1" physicalName="henkilomaara" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
-     <remarks></remarks>
-    </column>
-    <column id="COL20" populated="true" UUID="f62365ab-4748-463a-a31a-86f5d6844dcf" autoIncrement="false" autoIncrementSequenceName="auto_vuosimalli_seq" defaultValue="" name="Vuosimalli" nullable="0" physicalName="vuosimalli" precision="4" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="1" userDefinedTypeUUID="67ddc63f-5541-4dd1-9236-632d9d155e80" >
+    <column id="COL19" populated="true" UUID="f62365ab-4748-463a-a31a-86f5d6844dcf" autoIncrement="false" autoIncrementSequenceName="auto_vuosimalli_seq" defaultValue="" name="Vuosimalli" nullable="0" physicalName="vuosimalli" precision="4" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="1" userDefinedTypeUUID="67ddc63f-5541-4dd1-9236-632d9d155e80" >
      <remarks></remarks>
     </column>
     </folder>
@@ -86,49 +83,49 @@
     <folder id="FOLTAB152" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
     <folder id="FOLTAB154" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX21" populated="true" UUID="1aaf727c-0eeb-4df3-9eed-ffb157e40bd5" clustered="false" name="auto_pk" physicalName="auto_pk" primaryKeyIndex="true" unique="false" >
-     <index-column id="IDC22" populated="true" UUID="256debff-543a-4785-b248-ff01792bfbf9" ascendingOrDescending="UNSPECIFIED" column-ref="COL16" name="Rekisterinumero" physicalName="rekisterinumero" />
+    <index id="IDX20" populated="true" UUID="1aaf727c-0eeb-4df3-9eed-ffb157e40bd5" clustered="false" name="auto_pk" physicalName="auto_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC21" populated="true" UUID="256debff-543a-4785-b248-ff01792bfbf9" ascendingOrDescending="UNSPECIFIED" column-ref="COL16" name="Rekisterinumero" physicalName="rekisterinumero" />
     </index>
    </folder>
   </table>
-  <table id="TAB23" populated="true" UUID="3651fc87-48ae-4386-9023-4a28953e9247" name="Lainaus" objectType="TABLE" physicalName="lainaus" >
+  <table id="TAB22" populated="true" UUID="3651fc87-48ae-4386-9023-4a28953e9247" name="Lainaus" objectType="TABLE" physicalName="lainaus" >
    <remarks>Lainaustapahtuman tiedot</remarks>
-   <folder id="FOLTAB231" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL24" populated="true" UUID="02db0f8e-c54f-4116-86db-12a6c958b624" autoIncrement="true" autoIncrementSequenceName="lainaus_lainausnumero_seq" defaultValue="" name="LainausNumero" nullable="0" physicalName="lainausnumero" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
+   <folder id="FOLTAB221" populated="true" name="Columns" physicalName="Columns" type="1">
+    <column id="COL23" populated="true" UUID="02db0f8e-c54f-4116-86db-12a6c958b624" autoIncrement="true" autoIncrementSequenceName="lainaus_lainausnumero_seq" defaultValue="" name="LainausNumero" nullable="0" physicalName="lainausnumero" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks>Lainaustapahtumalle automaattisesti annettava juokseva numero</remarks>
     </column>
-    <column id="COL25" populated="true" UUID="056ab7bf-e590-4b3c-8b31-6d6a077b44b2" autoIncrement="false" autoIncrementSequenceName="lainaaja_hetu_seq" defaultValue="" name="HeTu" nullable="0" physicalName="hetu" precision="11" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="1" userDefinedTypeUUID="67ddc63f-5541-4dd1-9236-632d9d155e80" >
+    <column id="COL24" populated="true" UUID="056ab7bf-e590-4b3c-8b31-6d6a077b44b2" autoIncrement="false" autoIncrementSequenceName="lainaaja_hetu_seq" defaultValue="" name="HeTu" nullable="0" physicalName="hetu" precision="11" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="1" userDefinedTypeUUID="67ddc63f-5541-4dd1-9236-632d9d155e80" >
      <remarks>Kansallinen henkiltunnus</remarks>
     </column>
-    <column id="COL26" populated="true" UUID="0b8eaabb-88f6-41f3-91a8-c6382ec09aab" autoIncrement="false" autoIncrementSequenceName="auto_rekisterinumero_seq" defaultValue="" name="Rekisterinumero" nullable="0" physicalName="rekisterinumero" precision="7" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL25" populated="true" UUID="0b8eaabb-88f6-41f3-91a8-c6382ec09aab" autoIncrement="false" autoIncrementSequenceName="auto_rekisterinumero_seq" defaultValue="" name="Rekisterinumero" nullable="0" physicalName="rekisterinumero" precision="7" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL27" populated="true" UUID="753d90ca-1efb-4b6d-a9c1-c02121d23455" autoIncrement="false" autoIncrementSequenceName="lainaus_lainausaika_seq" defaultValue="" name="Lainausaika" nullable="0" physicalName="lainausaika" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+    <column id="COL26" populated="true" UUID="753d90ca-1efb-4b6d-a9c1-c02121d23455" autoIncrement="false" autoIncrementSequenceName="lainaus_lainausaika_seq" defaultValue="" name="Lainausaika" nullable="0" physicalName="lainausaika" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
      <remarks>Päivämäära ja kellonaika, kun auto on otettu lainaan</remarks>
     </column>
-    <column id="COL28" populated="true" UUID="e2a49133-4dbd-40fc-9f3c-40769f7d5b55" autoIncrement="false" autoIncrementSequenceName="lainaus_palautus_seq" defaultValue="" name="Palautus" nullable="1" physicalName="palautus" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
+    <column id="COL27" populated="true" UUID="e2a49133-4dbd-40fc-9f3c-40769f7d5b55" autoIncrement="false" autoIncrementSequenceName="lainaus_palautus_seq" defaultValue="" name="Palautus" nullable="1" physicalName="palautus" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="93" userDefinedTypeUUID="6497d8de-0e00-40d6-a42e-e2adca83be64" >
      <remarks>Palautuksen päivä ja kellonaika</remarks>
     </column>
     </folder>
-    <folder id="FOLTAB233" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
+    <folder id="FOLTAB223" populated="true" name="Exported Keys" physicalName="Exported Keys" type="3">
     </folder>
-    <folder id="FOLTAB232" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
+    <folder id="FOLTAB222" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
-    <folder id="FOLTAB234" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX29" populated="true" UUID="7d8c2cb3-c122-4de8-b648-b455cd1d5d90" clustered="false" name="lainaus_pk" physicalName="lainaus_pk" primaryKeyIndex="true" unique="false" >
-     <index-column id="IDC30" populated="true" UUID="34950791-e26b-48f3-a802-21975e52c74c" ascendingOrDescending="UNSPECIFIED" column-ref="COL24" name="LainausNumero" physicalName="lainausnumero" />
+    <folder id="FOLTAB224" populated="true" name="Indices" physicalName="Indices" type="4">
+    <index id="IDX28" populated="true" UUID="7d8c2cb3-c122-4de8-b648-b455cd1d5d90" clustered="false" name="lainaus_pk" physicalName="lainaus_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC29" populated="true" UUID="34950791-e26b-48f3-a802-21975e52c74c" ascendingOrDescending="UNSPECIFIED" column-ref="COL23" name="LainausNumero" physicalName="lainausnumero" />
     </index>
    </folder>
   </table>
   <relationships>
-   <relationship id="REL31" populated="true" UUID="105820e2-0879-4c11-a177-ac321ae85425" deferrability="7" deleteRule="3" fk-table-ref="TAB23" fkCardinality="7" identifying="false" name="lainaaja_lainaus_fk" physicalName="lainaaja_lainaus_fk" pk-table-ref="TAB1" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP32" populated="true" UUID="0e9d7ff7-bd46-42b8-b345-dd22f80e222f" fk-column-ref="COL25" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL2" />
+   <relationship id="REL30" populated="true" UUID="105820e2-0879-4c11-a177-ac321ae85425" deferrability="7" deleteRule="3" fk-table-ref="TAB22" fkCardinality="7" identifying="false" name="lainaaja_lainaus_fk" physicalName="lainaaja_lainaus_fk" pk-table-ref="TAB1" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP31" populated="true" UUID="0e9d7ff7-bd46-42b8-b345-dd22f80e222f" fk-column-ref="COL24" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL2" />
    </relationship>
-   <relationship id="REL33" populated="true" UUID="a53831c6-3e0e-4fec-8501-17601c5669b0" deferrability="7" deleteRule="3" fk-table-ref="TAB1" fkCardinality="7" identifying="false" name="ryhma_lainaaja_fk" physicalName="ryhma_lainaaja_fk" pk-table-ref="TAB10" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP34" populated="true" UUID="5df049f3-241b-4792-8858-85bfea0200b7" fk-column-ref="COL6" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL11" />
+   <relationship id="REL32" populated="true" UUID="a53831c6-3e0e-4fec-8501-17601c5669b0" deferrability="7" deleteRule="3" fk-table-ref="TAB1" fkCardinality="7" identifying="false" name="ryhma_lainaaja_fk" physicalName="ryhma_lainaaja_fk" pk-table-ref="TAB10" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP33" populated="true" UUID="5df049f3-241b-4792-8858-85bfea0200b7" fk-column-ref="COL6" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL11" />
    </relationship>
-   <relationship id="REL35" populated="true" UUID="1cc2b4dd-a5bd-4749-9ce3-2944722120d7" deferrability="7" deleteRule="3" fk-table-ref="TAB23" fkCardinality="7" identifying="false" name="auto_lainaus_fk" physicalName="auto_lainaus_fk" pk-table-ref="TAB15" pkCardinality="2" updateRule="3" >
-    <column-mapping id="CMP36" populated="true" UUID="51082649-02cb-4104-9356-1ebcbdafc6eb" fk-column-ref="COL26" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL16" />
+   <relationship id="REL34" populated="true" UUID="1cc2b4dd-a5bd-4749-9ce3-2944722120d7" deferrability="7" deleteRule="3" fk-table-ref="TAB22" fkCardinality="7" identifying="false" name="auto_lainaus_fk" physicalName="auto_lainaus_fk" pk-table-ref="TAB15" pkCardinality="2" updateRule="3" >
+    <column-mapping id="CMP35" populated="true" UUID="51082649-02cb-4104-9356-1ebcbdafc6eb" fk-column-ref="COL25" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL16" />
    </relationship>
   </relationships>
  </target-database>
@@ -139,10 +136,10 @@
   <table-pane table-ref="TAB1" x="285" y="102" bgColor="0xb9bbf6" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB10" x="20" y="111" bgColor="0xb9bbf6" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB15" x="857" y="90" bgColor="0xf6bcbc" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-pane table-ref="TAB23" x="555" y="97" bgColor="0xc8b7ea" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-link relationship-ref="REL33" pkConnection="0.6511627906976745" fkConnection="0.4117647058823529" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="33"/>
-  <table-link relationship-ref="REL31" pkConnection="0.35398230088495575" fkConnection="0.7894736842105263" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="33"/>
-  <table-link relationship-ref="REL35" pkConnection="0.49411764705882355" fkConnection="0.49295774647887325" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="18"/>
+  <table-pane table-ref="TAB22" x="555" y="97" bgColor="0xc8b7ea" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-link relationship-ref="REL32" pkConnection="0.6511627906976745" fkConnection="0.4117647058823529" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="33"/>
+  <table-link relationship-ref="REL30" pkConnection="0.35398230088495575" fkConnection="0.7894736842105263" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="33"/>
+  <table-link relationship-ref="REL34" pkConnection="0.49411764705882355" fkConnection="0.49295774647887325" rLineColor="0x000000" pkLabelText="" fkLabelText="" orientation="18"/>
  </play-pen>
  <critic-manager>
   <critic-grouping platformType="Generic" enabled="true">

@@ -26,7 +26,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(800, 611)
         icon = QIcon(QIcon.fromTheme(u"preferences-desktop-accessibility"))
         MainWindow.setWindowIcon(icon)
         self.actionMuokkaa = QAction(MainWindow)
@@ -43,21 +43,21 @@ class Ui_MainWindow(object):
         self.studentTab.setObjectName(u"studentTab")
         self.studentTab.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
         self.registeredPersonsTableWidget = QTableWidget(self.studentTab)
-        if (self.registeredPersonsTableWidget.columnCount() < 5):
-            self.registeredPersonsTableWidget.setColumnCount(5)
+        if (self.registeredPersonsTableWidget.columnCount() < 6):
+            self.registeredPersonsTableWidget.setColumnCount(6)
         if (self.registeredPersonsTableWidget.rowCount() < 10):
             self.registeredPersonsTableWidget.setRowCount(10)
         self.registeredPersonsTableWidget.setObjectName(u"registeredPersonsTableWidget")
-        self.registeredPersonsTableWidget.setGeometry(QRect(20, 200, 601, 321))
+        self.registeredPersonsTableWidget.setGeometry(QRect(20, 240, 641, 271))
         self.registeredPersonsTableWidget.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.ForbiddenCursor))
         self.registeredPersonsTableWidget.setRowCount(10)
-        self.registeredPersonsTableWidget.setColumnCount(5)
+        self.registeredPersonsTableWidget.setColumnCount(6)
         self.registeredPersonsLabel = QLabel(self.studentTab)
         self.registeredPersonsLabel.setObjectName(u"registeredPersonsLabel")
-        self.registeredPersonsLabel.setGeometry(QRect(20, 180, 131, 16))
+        self.registeredPersonsLabel.setGeometry(QRect(20, 220, 131, 16))
         self.savePersonPushButton = QPushButton(self.studentTab)
         self.savePersonPushButton.setObjectName(u"savePersonPushButton")
-        self.savePersonPushButton.setGeometry(QRect(310, 140, 71, 23))
+        self.savePersonPushButton.setGeometry(QRect(310, 175, 71, 23))
         font = QFont()
         font.setBold(True)
         self.savePersonPushButton.setFont(font)
@@ -66,7 +66,7 @@ class Ui_MainWindow(object):
 "color: rgb(255, 255, 255);")
         self.layoutWidget = QWidget(self.studentTab)
         self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(130, 10, 171, 156))
+        self.layoutWidget.setGeometry(QRect(130, 10, 171, 188))
         self.studentInputsVerticalLayout = QVBoxLayout(self.layoutWidget)
         self.studentInputsVerticalLayout.setObjectName(u"studentInputsVerticalLayout")
         self.studentInputsVerticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -77,6 +77,12 @@ class Ui_MainWindow(object):
         self.ssnLineEdit.setFont(font1)
 
         self.studentInputsVerticalLayout.addWidget(self.ssnLineEdit)
+
+        self.emailLineEdit = QLineEdit(self.layoutWidget)
+        self.emailLineEdit.setObjectName(u"emailLineEdit")
+        self.emailLineEdit.setFont(font1)
+
+        self.studentInputsVerticalLayout.addWidget(self.emailLineEdit)
 
         self.firstNameLineEdit = QLineEdit(self.layoutWidget)
         self.firstNameLineEdit.setObjectName(u"firstNameLineEdit")
@@ -104,7 +110,7 @@ class Ui_MainWindow(object):
 
         self.layoutWidget1 = QWidget(self.studentTab)
         self.layoutWidget1.setObjectName(u"layoutWidget1")
-        self.layoutWidget1.setGeometry(QRect(20, 10, 101, 161))
+        self.layoutWidget1.setGeometry(QRect(20, 10, 101, 191))
         self.studentLabelsVerticalLayout = QVBoxLayout(self.layoutWidget1)
         self.studentLabelsVerticalLayout.setObjectName(u"studentLabelsVerticalLayout")
         self.studentLabelsVerticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -115,6 +121,12 @@ class Ui_MainWindow(object):
         self.ssnLabel.setFont(font2)
 
         self.studentLabelsVerticalLayout.addWidget(self.ssnLabel)
+
+        self.emailLabel = QLabel(self.layoutWidget1)
+        self.emailLabel.setObjectName(u"emailLabel")
+        self.emailLabel.setFont(font2)
+
+        self.studentLabelsVerticalLayout.addWidget(self.emailLabel)
 
         self.firstNameLabel = QLabel(self.layoutWidget1)
         self.firstNameLabel.setObjectName(u"firstNameLabel")
@@ -371,7 +383,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -383,11 +395,13 @@ class Ui_MainWindow(object):
         self.actionTietoja_ohjelmasta.setText(QCoreApplication.translate("MainWindow", u"Tietoja ohjelmasta...", None))
         self.registeredPersonsLabel.setText(QCoreApplication.translate("MainWindow", u"Rekister\u00f6idyt lainaajat", None))
         self.savePersonPushButton.setText(QCoreApplication.translate("MainWindow", u"Tallenna", None))
+        self.groupComboBox.setCurrentText("")
         self.ssnLabel.setText(QCoreApplication.translate("MainWindow", u"Henkil\u00f6tunnus", None))
+        self.emailLabel.setText(QCoreApplication.translate("MainWindow", u"S\u00e4hk\u00f6posti", None))
         self.firstNameLabel.setText(QCoreApplication.translate("MainWindow", u"Etunimi", None))
         self.lastNameLabel.setText(QCoreApplication.translate("MainWindow", u"Sukunimi", None))
         self.groupLabel.setText(QCoreApplication.translate("MainWindow", u"Ryhm\u00e4", None))
-        self.vehicleClassLabel.setText(QCoreApplication.translate("MainWindow", u"Ajoneuvoluokka", None))
+        self.vehicleClassLabel.setText(QCoreApplication.translate("MainWindow", u"Ajokorttiluokka", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.studentTab), QCoreApplication.translate("MainWindow", u"Lainaajat", None))
         self.numberPlateLabel.setText(QCoreApplication.translate("MainWindow", u"Rekisterinumero", None))
         self.manufacturerLabel.setText(QCoreApplication.translate("MainWindow", u"Merkki", None))
