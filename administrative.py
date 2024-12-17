@@ -113,7 +113,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Tehdään lista ryhmät-yhdistelmäruudun arvoista
         groupList = dbConnection.readColumnsFromTable('ryhma', ['ryhma'])
 
-        # Päivitetään elementin arvot
+        # TODO: Päivitetään elementin arvot
         self.ui.groupComboBox.addItem()
 
     # Painikkeiden slotit
