@@ -114,7 +114,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         groupList = dbConnection.readColumnsFromTable('ryhma', ['ryhma'])
 
         # Päivitetään elementin arvot
-        self.ui.groupComboBox.addItems()
+        self.ui.groupComboBox.addItem()
 
     # Painikkeiden slotit
     # -------------------
