@@ -39,12 +39,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Kutsutaan käyttöliittymän muodostusmetodia setupUi
         self.ui.setupUi(self)
 
+        # Päivitetään yhdistelmäruutujen arvot ohjelman käynistyksen yhteydessä
+        self.updateCombos()
+
         # Rutiini, joka lukee asetukset, jos ne ovat olemassa
         try:
             # Avataam asetustiedosto ja muutetaan se Python sanakirjaksi
             with open('settings.json', 'rt') as settingsFile: # With sulkee tiedoston automaattisesti
                 
-                # TODO: Mieti kannattaako muuttaa json.load(settingsFile)-komennoksi
                 jsonData = settingsFile.read()
                 self.currentSettings = json.loads(jsonData)
 
@@ -63,6 +65,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Valikkotoiminnot
         self.ui.actionMuokkaa.triggered.connect(self.openSettingsDialog)
         self.ui.actionTietoja_ohjelmasta.triggered.connect(self.openAboutDialog)
+
+        # Välilehtien viahdon käynistämät singnaalit
+
+        # Kun välilehteä vaihdetaan, päivitetään yhdistelmäruutujen valinnat
+        self.ui.tabWidget.currentChanged.connect(self.updateCombos)
 
         # Painikkeet
         self.ui.saveGroupPushButton.clicked.connect(self.saveGroup)
@@ -89,6 +96,25 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.aboutDialog = AboutDialog()
         self.aboutDialog.setWindowTitle('Tietoja ohjelmasta')
         self.aboutDialog.exec() # Luodaan dialogille event loop
+
+    # Välilehtien slotit
+    # ------------------
+
+    def updateCombos(self):
+
+        # Luetaan tietokanta-asetukset paikallisiin muuttujiin
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword # Vaihdetaan selväkieliseksi 
+
+        # Luodaan tietokantayhteys-olio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Tehdään lista ryhmät-yhdistelmäruudun arvoista
+        groupList = dbConnection.readColumnsFromTable('ryhma', ['ryhma'])
+
+        # Päivitetään elementin arvot
+        self.ui.groupComboBox.addItems()
 
     # Painikkeiden slotit
     # -------------------

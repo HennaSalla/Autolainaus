@@ -30,9 +30,9 @@
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
-    <widget class="QWidget" name="studentTab">
+    <widget class="QWidget" name="lenderTab">
      <property name="cursor">
       <cursorShape>ArrowCursor</cursorShape>
      </property>
@@ -500,7 +500,10 @@ color: rgb(255, 255, 255);</string>
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab">
+    <widget class="QWidget" name="groupsTab">
+     <property name="cursor">
+      <cursorShape>ArrowCursor</cursorShape>
+     </property>
      <attribute name="title">
       <string>Ryhmät</string>
      </attribute>
@@ -539,6 +542,9 @@ color: rgb(255, 255, 255);</string>
        <font>
         <pointsize>11</pointsize>
        </font>
+      </property>
+      <property name="cursor" stdset="0">
+       <cursorShape>ForbiddenCursor</cursorShape>
       </property>
       <property name="rowCount">
        <number>10</number>
