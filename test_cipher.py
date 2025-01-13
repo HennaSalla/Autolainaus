@@ -11,3 +11,5 @@ cryptoText = cipher.encrypt(chipherEngine, plainText)
 
 def test_decrypt():
     assert cipher.decrypt(chipherEngine, cryptoText, True) == plainText 
+
+# TODO: Tee tähän testi decryptString-funktiosta
