@@ -99,4 +99,5 @@ if __name__ == "__main__":
     sala = encryptString(selko)
     print('Salakirjoitettuna se on:', sala)
     purettu = decryptString(sala)
-    print('Purettuna se on:', purettu) """
+    print('Purettuna se on:', purettu)
+ """
