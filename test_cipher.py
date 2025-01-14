@@ -12,4 +12,9 @@ cryptoText = cipher.encrypt(chipherEngine, plainText)
 def test_decrypt():
     assert cipher.decrypt(chipherEngine, cryptoText, True) == plainText 
 
-# TODO: Tee tähän testi decryptString-funktiosta
+# Luodaan salateksti käyttämällä engryptString-funkitota
+cryptoText2 = cipher.encryptString('Selkokieliteksti')
+
+# Tehdään testi, joka käyttää decryptString-funktiota
+def test_decryptString():
+    assert cipher.decryptString(cryptoText2) == 'Selkokieliteksti'
