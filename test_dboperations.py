@@ -4,9 +4,17 @@
 import pytest # Virheilmoitusten testaus vaatii
 import dbOperations # Testattava moduuli
 
-# TODO: Luo tietokanta yhteys-objekti testejä varten
+settingsDictionary = {'server': 'localhost',
+                      'port': '5432',
+                      'database': 'testaus',
+                      'userName': 'postgres',
+                      'password': 'Q2werty'}
+
+dbConnection = dbOperations.DbConnection(settingsDictionary)
 
 # TODO: Testaa, että yhteysmerkkijono muodostuu oikein
+def test_connectionstirng():
+    assert dbConnection.connectionString ==  f"dbname=testaus user=postgres password=Q2werty host=localhost port=5432"
 
 # TODO: Testaa että taulun kaikki tiedot saadaan
 
