@@ -17,5 +17,9 @@ def test_connectionstirng():
     assert dbConnection.connectionString ==  f"dbname=testaus user=postgres password=Q2werty host=localhost port=5432"
 
 # TODO: Testaa että taulun kaikki tiedot saadaan
+def test_readOneRow():
+    resultList = dbConnection.readAllColumnsFromTable('person')
+    assert resultList[0] == (1, 'Ville', 'Virtanen')
+
 
 # TODO: Mieti mitä muita testejä pitää kirjoittaa
