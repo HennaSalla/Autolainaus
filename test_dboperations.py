@@ -12,14 +12,14 @@ settingsDictionary = {'server': 'localhost',
 
 dbConnection = dbOperations.DbConnection(settingsDictionary)
 
-# TODO: Testaa, että yhteysmerkkijono muodostuu oikein
+# Testaan, että yhteysmerkkijono muodostuu oikein
 def test_connectionstirng():
     assert dbConnection.connectionString ==  f"dbname=testaus user=postgres password=Q2werty host=localhost port=5432"
 
-# TODO: Testaa että taulun kaikki tiedot saadaan
+# Testaan, että taulun kaikki tiedot saadaan ja ensimäinen rivi on Ville Virtanen
 def test_readOneRow():
-    resultList = dbConnection.readAllColumnsFromTable('person')
-    assert resultList[0] == (1, 'Ville', 'Virtanen')
+    resultList = dbConnection.readAllColumnsFromTable('person') # Hakee taulun kaikki rivit listaan
+    assert resultList[0] == (1, 'Ville', 'Virtanen') # Ensimmäinen rivi pitäisi olla 1 Ville Virtanen
 
 
 # TODO: Mieti mitä muita testejä pitää kirjoittaa
