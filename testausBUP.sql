@@ -101,7 +101,6 @@ INSERT INTO public.person VALUES (1, 'Ville', 'Virtanen');
 INSERT INTO public.person VALUES (2, 'Jakke', 'J�yn�');
 INSERT INTO public.person VALUES (3, 'Assi', 'Kalma');
 INSERT INTO public.person VALUES (4, 'Tuittu', 'Kiukkunen');
-INSERT INTO public.person VALUES (5, 'Jakke', 'J�yn�');
 
 
 --
