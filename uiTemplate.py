@@ -1,6 +1,6 @@
 # PYSIDE6-MALLINE SOVELLUKSEN PÄÄIKKUNAN LUOMISEEN
 # KÄÄNNETYSTÄ KÄYTTÖLIITTYMÄTIEDOSTOSTA (mainWindow_ui.py)
-# =====================================================
+# ========================================================
 
 # KIRJASTOJEN JA MODUULIEN LATAUKSET
 # ----------------------------------
