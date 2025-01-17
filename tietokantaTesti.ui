@@ -13,6 +13,12 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="windowIcon">
+   <iconset theme="preferences-desktop-accessibility"/>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(223, 32, 112);</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLineEdit" name="firstNameLineEdit">
     <property name="geometry">
@@ -23,6 +29,9 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
    </widget>
    <widget class="QLabel" name="firstNameLabel">
     <property name="geometry">
@@ -32,6 +41,9 @@
       <width>81</width>
       <height>16</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>Puhuttelunimi</string>
@@ -56,6 +68,9 @@
       <height>16</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
     <property name="text">
      <string>Sukunimi</string>
     </property>
@@ -78,8 +93,63 @@
     <property name="toolTipDuration">
      <number>3000</number>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(75, 188, 197);</string>
+    </property>
     <property name="text">
      <string>Tallenna</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="studentPictureLabel">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>110</y>
+      <width>231</width>
+      <height>221</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="testPictures.qrc">:/png/student.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="keysPictureLabel">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>150</y>
+      <width>231</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="testPictures.qrc">:/png/keys.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="teacherPictureLabel">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>130</y>
+      <width>191</width>
+      <height>211</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>teacher.png</pixmap>
     </property>
    </widget>
   </widget>
@@ -92,9 +162,73 @@
      <height>33</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(0, 33, 72);
+color: rgb(255, 255, 255);</string>
+   </property>
+   <widget class="QMenu" name="menuTiedosto">
+    <property name="title">
+     <string>Tiedosto</string>
+    </property>
+    <widget class="QMenu" name="menuEdelliset">
+     <property name="title">
+      <string>Edelliset</string>
+     </property>
+     <addaction name="actionKalle"/>
+     <addaction name="actionVille"/>
+     <addaction name="actionJaana"/>
+     <addaction name="actionMikko"/>
+    </widget>
+    <addaction name="actionLopeta"/>
+    <addaction name="menuEdelliset"/>
+    <addaction name="actionTallenna_nimell"/>
+   </widget>
+   <addaction name="menuTiedosto"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(243, 84, 148);</string>
+   </property>
+  </widget>
+  <action name="actionLopeta">
+   <property name="icon">
+    <iconset theme="application-exit"/>
+   </property>
+   <property name="text">
+    <string>Lopeta</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionKalle">
+   <property name="text">
+    <string>Kalle</string>
+   </property>
+  </action>
+  <action name="actionVille">
+   <property name="text">
+    <string>Ville</string>
+   </property>
+  </action>
+  <action name="actionJaana">
+   <property name="text">
+    <string>Jaana</string>
+   </property>
+  </action>
+  <action name="actionMikko">
+   <property name="text">
+    <string>Mikko</string>
+   </property>
+  </action>
+  <action name="actionTallenna_nimell">
+   <property name="text">
+    <string>Tallenna nimellä...</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="testPictures.qrc"/>
+ </resources>
  <connections/>
 </ui>
