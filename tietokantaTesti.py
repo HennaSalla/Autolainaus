@@ -36,6 +36,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                       'database': 'testaus',
                       'userName': 'postgres',
                       'password': 'Q2werty'}
+        
+        # Tekstiä tilarivillä
+        message = 'Tähän jonkin lainen ohje teksti'
+        self.ui.statusbar.showMessage(message)
 
 
         
@@ -54,8 +58,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.firstNameLineEdit.clear()
         self.ui.lastNameLineEdit.clear()
         
-
-        
+    
 
     # Avataan MessageBox
     def openWarning(self):
