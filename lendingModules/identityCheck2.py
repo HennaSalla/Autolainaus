@@ -1,3 +1,5 @@
+"""A module to check the validity of Finnish Social Security Number (SSN). Contains methods to caculate age and determine the gender of person.
+"""
 # LUOKKA HENKILÖTUNNUSTEN KÄSITTELYYN
 # ===================================
 

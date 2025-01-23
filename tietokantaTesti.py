@@ -6,7 +6,7 @@
 
 import os # Polkumääritykset
 import sys # Käynnistysargumentit
-import modules.dbOperations as dbOperations
+from lendingModules import dbOperations
 
 from PySide6 import QtWidgets # Qt-vimpaimet
 from tietokantaTesti_ui import Ui_MainWindow # Käännetyn käyttöliittymän luokka

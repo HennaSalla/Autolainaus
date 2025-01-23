@@ -2,7 +2,7 @@
 # =================================
 
 import pytest # Järjestelmätason virheiden testaus
-import modules.cipher as cipher # Testattavan moduulin lataus
+from lendingModules import cipher # Testattavan moduulin lataus
 
 plainText = b'Selkokieliteksti'
 key = b'oqjptt7iNxAnpF4DnKyVmcSv9mu3feeVChxBHZijMsI='

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>446</width>
+    <width>447</width>
     <height>762</height>
    </rect>
   </property>
@@ -44,27 +44,6 @@
      <attribute name="title">
       <string>Lainaus</string>
      </attribute>
-     <widget class="QLabel" name="takeTitleLabel">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>20</y>
-        <width>231</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>22</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(75, 188, 197);</string>
-      </property>
-      <property name="text">
-       <string>AUTON LAINAUS</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="borrowerLabel">
       <property name="geometry">
        <rect>
@@ -354,6 +333,27 @@
        <string/>
       </property>
      </widget>
+     <widget class="QLabel" name="returnCar">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>10</y>
+        <width>251</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>22</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(75, 188, 197);</string>
+      </property>
+      <property name="text">
+       <string>AUTON LAINAUS</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="returnTab">
      <property name="font">
@@ -413,27 +413,6 @@
       </property>
       <property name="pixmap">
        <pixmap resource="kuvat.qrc">:/kuvat/clock.png</pixmap>
-      </property>
-     </widget>
-     <widget class="QLabel" name="returnCar">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>0</y>
-        <width>251</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>22</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(75, 188, 197);</string>
-      </property>
-      <property name="text">
-       <string>AUTON PALAUTUS</string>
       </property>
      </widget>
      <widget class="QLabel" name="carReturn">
@@ -586,6 +565,27 @@
        <string/>
       </property>
      </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>10</y>
+        <width>181</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(75, 188, 197);</string>
+      </property>
+      <property name="text">
+       <string>Auton palutus</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -594,7 +594,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>446</width>
+     <width>447</width>
      <height>33</height>
     </rect>
    </property>
