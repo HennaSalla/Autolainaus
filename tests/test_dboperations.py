@@ -2,7 +2,7 @@
 # ============================
 
 import pytest # Virheilmoitusten testaus vaatii
-import dbOperations # Testattava moduuli
+import modules.dbOperations as dbOperations # Testattava moduuli
 
 settingsDictionary = {'server': 'localhost',
                       'port': '5432',
