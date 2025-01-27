@@ -125,7 +125,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         dbConnection = dbOperations.DbConnection(dbSettings)
 
         # Tehdään lista ryhmät-yhdistelmäruudun arvoista
-        groupList = dbConnection.readColumnsFromTable('ryhma', ['ryhma'])
+        groupList = dbConnection.readColumsFromTable('ryhma', ['ryhma'])
 
         groupStringList = []
         for item in groupList:
