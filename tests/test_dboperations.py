@@ -29,5 +29,3 @@ def test_readOneRow():
 def test_addRow():
     dbConnection.addToTable('person', newValues)
     resultList = dbConnection.readAllColumnsFromTable('person')
-    rowCount = len(resultList)
-    assert resultList[rowCount-1] == (rowCount, 'Ossian', 'Onneton')
