@@ -1,0 +1,10 @@
+<RCC>
+  <qresource prefix="pictures">
+    <file>uiPictrues/auto.png</file>
+    <file>uiPictrues/calender.png</file>
+    <file>uiPictrues/soundOff.png</file>
+    <file>uiPictrues/soundsOn.png</file>
+    <file>uiPictrues/clock.png</file>
+    <file>uiPictrues/human.png</file>
+  </qresource>
+</RCC>
