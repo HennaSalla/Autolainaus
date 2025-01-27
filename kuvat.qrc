@@ -1,8 +1,0 @@
-<RCC>
-  <qresource prefix="kuvat">
-    <file>auto.png</file>
-    <file>calender.png</file>
-    <file>clock.png</file>
-    <file>human.png</file>
-  </qresource>
-</RCC>
