@@ -1,32 +1,32 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17" pages="2">
   <diagram name="Page-1" id="n02zPbm6KEdVIElCw9b6">
-    <mxGraphModel dx="794" dy="556" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="1418" dy="940" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="MUidiiKsfbA5fLykq-wW-1" value="psycopg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#e51400;strokeColor=#B20000;strokeWidth=4;startArrow=classic;startFill=1;fontSize=14;" edge="1" parent="1" source="MUidiiKsfbA5fLykq-wW-2" target="MUidiiKsfbA5fLykq-wW-3">
+        <mxCell id="MUidiiKsfbA5fLykq-wW-1" value="psycopg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#e51400;strokeColor=#B20000;strokeWidth=4;startArrow=classic;startFill=1;fontSize=14;" parent="1" source="MUidiiKsfbA5fLykq-wW-2" target="MUidiiKsfbA5fLykq-wW-3" edge="1">
           <mxGeometry x="-0.2863" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="MUidiiKsfbA5fLykq-wW-2" value="Lainaussovellus&lt;div&gt;lending.py&lt;/div&gt;" style="verticalLabelPosition=bottom;sketch=0;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.tablet_1;" vertex="1" parent="1">
-          <mxGeometry x="110" y="70" width="61" height="79" as="geometry" />
+        <mxCell id="MUidiiKsfbA5fLykq-wW-2" value="Lainaussovellus&lt;div&gt;lending.py&lt;/div&gt;" style="verticalLabelPosition=bottom;sketch=0;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.tablet_1;" parent="1" vertex="1">
+          <mxGeometry x="100" y="60" width="61" height="79" as="geometry" />
         </mxCell>
-        <mxCell id="MUidiiKsfbA5fLykq-wW-3" value="PostgreSQL-palvelin&lt;div&gt;autolainaus-tietokanta&lt;/div&gt;" style="verticalLabelPosition=middle;sketch=0;aspect=fixed;html=1;verticalAlign=middle;strokeColor=none;align=left;outlineConnect=0;shape=mxgraph.citrix.database_server;labelPosition=right;" vertex="1" parent="1">
+        <mxCell id="MUidiiKsfbA5fLykq-wW-3" value="PostgreSQL-palvelin&lt;div&gt;autolainaus-tietokanta&lt;/div&gt;" style="verticalLabelPosition=middle;sketch=0;aspect=fixed;html=1;verticalAlign=middle;strokeColor=none;align=left;outlineConnect=0;shape=mxgraph.citrix.database_server;labelPosition=right;" parent="1" vertex="1">
           <mxGeometry x="410" y="220" width="80" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="MUidiiKsfbA5fLykq-wW-4" value="psycopg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#e51400;strokeColor=#B20000;strokeWidth=4;startArrow=classic;startFill=1;fontSize=14;" edge="1" parent="1" source="MUidiiKsfbA5fLykq-wW-6" target="MUidiiKsfbA5fLykq-wW-3">
+        <mxCell id="MUidiiKsfbA5fLykq-wW-4" value="psycopg" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#e51400;strokeColor=#B20000;strokeWidth=4;startArrow=classic;startFill=1;fontSize=14;" parent="1" source="MUidiiKsfbA5fLykq-wW-6" target="MUidiiKsfbA5fLykq-wW-3" edge="1">
           <mxGeometry x="-0.3459" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="MUidiiKsfbA5fLykq-wW-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;endArrow=none;endFill=0;" edge="1" parent="1" source="MUidiiKsfbA5fLykq-wW-6" target="MUidiiKsfbA5fLykq-wW-7">
+        <mxCell id="MUidiiKsfbA5fLykq-wW-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;endArrow=none;endFill=0;" parent="1" source="MUidiiKsfbA5fLykq-wW-6" target="MUidiiKsfbA5fLykq-wW-7" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="MUidiiKsfbA5fLykq-wW-6" value="Hallintasovellus&lt;div&gt;administrative.py&lt;/div&gt;" style="verticalLabelPosition=bottom;sketch=0;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.desktop;" vertex="1" parent="1">
+        <mxCell id="MUidiiKsfbA5fLykq-wW-6" value="Hallintasovellus&lt;div&gt;administrative.py&lt;/div&gt;" style="verticalLabelPosition=bottom;sketch=0;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.desktop;" parent="1" vertex="1">
           <mxGeometry x="100" y="370" width="89" height="98" as="geometry" />
         </mxCell>
-        <mxCell id="MUidiiKsfbA5fLykq-wW-7" value="" style="verticalLabelPosition=bottom;sketch=0;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.printer;" vertex="1" parent="1">
+        <mxCell id="MUidiiKsfbA5fLykq-wW-7" value="" style="verticalLabelPosition=bottom;sketch=0;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.printer;" parent="1" vertex="1">
           <mxGeometry x="250" y="300" width="70" height="70" as="geometry" />
         </mxCell>
       </root>
