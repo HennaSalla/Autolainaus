@@ -227,6 +227,9 @@
     <property name="placeholderText">
      <string>Lue avain</string>
     </property>
+    <property name="clearButtonEnabled">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QLineEdit" name="licenseLineEdit">
     <property name="geometry">
@@ -250,6 +253,9 @@
     </property>
     <property name="placeholderText">
      <string>Lue ajokortti</string>
+    </property>
+    <property name="clearButtonEnabled">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="calenderLabel">
@@ -292,7 +298,7 @@
    <widget class="QPushButton" name="goBackPushButton">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>20</x>
       <y>700</y>
       <width>211</width>
       <height>91</height>
@@ -371,6 +377,27 @@
     </property>
     <property name="text">
      <string>Merkki ja Malli</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="okPushButton">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>700</y>
+      <width>211</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(75, 188, 197);</string>
+    </property>
+    <property name="text">
+     <string>Ok</string>
     </property>
    </widget>
   </widget>
