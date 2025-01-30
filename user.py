@@ -202,7 +202,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         msgBox = QtWidgets.QMessageBox()
         msgBox.setIcon(QtWidgets.QMessageBox.Critical)
         msgBox.setWindowTitle('Tietokantayhteyttä ei voitu muodostaa')
-        msgBox.setText('Ota yhteyttä ')
+        msgBox.setText('Ota yhteyttä ryhmän ohjaajaan')
         msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msgBox.exec()
 
