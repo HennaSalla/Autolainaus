@@ -149,7 +149,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         dbSettings = self.currentSettings
         plainTextPassword = self.plainTextPassword
         dbSettings['password'] = plainTextPassword # Vaihdetaan selväkieliseksi 
-
+        # TODO: Laita seuraava lohko virheenkäsittelyn sisälle
         # Luodaan tietokantayhteys-olio
         dbConnection = dbOperations.DbConnection(dbSettings)
         ssn = self.ui.licenseLineEdit.text()
