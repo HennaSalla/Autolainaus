@@ -27,23 +27,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.setupUi(self)
 
         # Ohjelmaa käynnistäessä piilotetaan tarpeettomat elementit
-        self.ui.returnCarPushButton.show()
-        self.ui.takeCarPushButton.show()
-        self.ui.soundOnPushButton.hide()
-        self.ui.borrowerLabel.hide()
-        self.ui.humanLabel.hide()
-        self.ui.licenseLineEdit.hide()
-        self.ui.nameLabel.hide()
-        self.ui.carTakeLabel.hide()
-        self.ui.carKeysLabel.hide()
-        self.ui.keysLineEdit.hide()
-        self.ui.carInfoLabel.hide()
-        self.ui.calenderLabel.hide()
-        self.ui.dateLabel.hide()
-        self.ui.clockPictureLabel.hide()
-        self.ui.hourLabel.hide()
-        self.ui.goBackPushButton.hide()
-        self.ui.okPushButton.hide()
+        self.setInitialElements()
 
 
 
@@ -65,21 +49,44 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Kuin Palauta auto painiketta on painettu kutsutaan metodia returnCar
         self.ui.returnCarPushButton.clicked.connect(self.returnCar)
+
+        # Kun Ok-painiketta on painettu talenna tiedot ja palauta käyttöliittymä alkutilaan
+        self.ui.okPushButton.clicked.connect(self.saveLendingData)
         
     # OHJELMOIDUT SLOTIT
     # ------------------
+
+    # Kutsutana kuin halutaan palauttaa käyttöliitymän alkutilaan
+    def setInitialElements(self):
+        self.ui.returnCarPushButton.show()
+        self.ui.takeCarPushButton.show()
+        self.ui.soundOnPushButton.hide()
+        self.ui.borrowerLabel.hide()
+        self.ui.humanLabel.hide()
+        self.ui.licenseLineEdit.hide()
+        self.ui.nameLabel.hide()
+        self.ui.carTakeLabel.hide()
+        self.ui.carKeysLabel.hide()
+        self.ui.keysLineEdit.hide()
+        self.ui.carInfoLabel.hide()
+        self.ui.calenderLabel.hide()
+        self.ui.dateLabel.hide()
+        self.ui.clockPictureLabel.hide()
+        self.ui.hourLabel.hide()
+        self.ui.goBackPushButton.hide()
+        self.ui.okPushButton.hide()
+        self.ui.keysReturnLineEdit.hide()
 
     # Kuin Aloita lainaus nappia on painettu nämä componentit tulee esiin tai piiloutuu
     def takeCar(self):
         self.ui.borrowerLabel.show()
         self.ui.humanLabel.show()
         self.ui.goBackPushButton.show()
-        self.ui.okPushButton.show()
         self.ui.licenseLineEdit.show()
         self.ui.licenseLineEdit.setFocus()
         self.ui.returnCarPushButton.hide()
         self.ui.takeCarPushButton.hide()
-        self.ui.statusbar.showMessage('Lue ajokortin viivakoodi', 6000)
+        self.ui.statusbar.showMessage('Lue ajokortin viivakoodi')
 
     # Ajokortin lukemisen jälkeen nämä komponentint tulevat essin
     def showKeys(self):
@@ -88,7 +95,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.carKeysLabel.show()
         self.ui.keysLineEdit.show()
         self.ui.keysLineEdit.setFocus()
-        self.ui.statusbar.showMessage('Lue avaimen viivakoodi', 6000)
+        self.ui.statusbar.showMessage('Lue avaimen viivakoodi')
 
     # Kuin avaimen viivakoodi on luettu nämä komponentit tulevat essin
     def showTime(self):
@@ -97,7 +104,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.dateLabel.show()
         self.ui.clockPictureLabel.show()
         self.ui.hourLabel.show()
+        self.ui.okPushButton.show()
+        self.ui.statusbar.showMessage('Jos tiedot on oikein paina Ok painiketta')
 
+    def saveLendingData(self):
+        # tallenna tiedot tietokantaan
+        self.setInitialElements()
+        self.ui.statusbar.showMessage('Lainaustiedot on tallenettu', 5000)
 
     # mykistäessä nämä komponentit tulevat esiin tai piilotetaan
     def muteSound(self):
@@ -111,15 +124,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     # Kuin aloita palautus nappia on painettu nämä komponentit tulevat näkyviin tai piiloutuu
     def returnCar(self):
-        self.ui.takeCarPushButton.hide()
-        self.ui.returnCarPushButton.hide()
-        self.ui.carTakeLabel.show()
-        self.ui.carKeysLabel.show()
-        self.ui.keysLineEdit.show()
-        self.ui.keysLineEdit.setFocus()
-        self.ui.goBackPushButton.show()
-        self.ui.okPushButton.show()
-        self.ui.statusbar.showMessage('Lue avaimen viivakoodi', 6000)
+        pass
     
 
     # Avataan MessageBox

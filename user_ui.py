@@ -19,7 +19,6 @@ from PySide6.QtWidgets import (QApplication, QLabel, QLineEdit, QMainWindow,
     QMenuBar, QPushButton, QSizePolicy, QStatusBar,
     QWidget)
 import userUiRescources_rc
-import userUiRescources_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -90,7 +89,7 @@ class Ui_MainWindow(object):
         self.keysLineEdit.setClearButtonEnabled(True)
         self.licenseLineEdit = QLineEdit(self.centralwidget)
         self.licenseLineEdit.setObjectName(u"licenseLineEdit")
-        self.licenseLineEdit.setGeometry(QRect(60, 360, 161, 41))
+        self.licenseLineEdit.setGeometry(QRect(40, 360, 201, 41))
         self.licenseLineEdit.setFont(font1)
         self.licenseLineEdit.setStyleSheet(u"color: rgb(75, 188, 197);")
         self.licenseLineEdit.setClearButtonEnabled(True)
@@ -128,6 +127,12 @@ class Ui_MainWindow(object):
         self.okPushButton.setGeometry(QRect(250, 700, 211, 91))
         self.okPushButton.setFont(font)
         self.okPushButton.setStyleSheet(u"color: rgb(75, 188, 197);")
+        self.keysReturnLineEdit = QLineEdit(self.centralwidget)
+        self.keysReturnLineEdit.setObjectName(u"keysReturnLineEdit")
+        self.keysReturnLineEdit.setGeometry(QRect(270, 350, 181, 41))
+        self.keysReturnLineEdit.setFont(font1)
+        self.keysReturnLineEdit.setStyleSheet(u"color: rgb(75, 188, 197);")
+        self.keysReturnLineEdit.setClearButtonEnabled(True)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
@@ -166,5 +171,7 @@ class Ui_MainWindow(object):
         self.nameLabel.setText(QCoreApplication.translate("MainWindow", u"Lainaajan nimi", None))
         self.carInfoLabel.setText(QCoreApplication.translate("MainWindow", u"Merkki ja Malli", None))
         self.okPushButton.setText(QCoreApplication.translate("MainWindow", u"Ok", None))
+        self.keysReturnLineEdit.setText("")
+        self.keysReturnLineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Lue avain", None))
     # retranslateUi
 

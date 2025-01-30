@@ -234,9 +234,9 @@
    <widget class="QLineEdit" name="licenseLineEdit">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>40</x>
       <y>360</y>
-      <width>161</width>
+      <width>201</width>
       <height>41</height>
      </rect>
     </property>
@@ -400,6 +400,33 @@
      <string>Ok</string>
     </property>
    </widget>
+   <widget class="QLineEdit" name="keysReturnLineEdit">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>350</y>
+      <width>181</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(75, 188, 197);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="placeholderText">
+     <string>Lue avain</string>
+    </property>
+    <property name="clearButtonEnabled">
+     <bool>true</bool>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -422,7 +449,6 @@
  </widget>
  <resources>
   <include location="userUiRescources.qrc"/>
-  <include location="../../../../../../Windows/system32/userUiRescources.qrc"/>
  </resources>
  <connections/>
 </ui>
