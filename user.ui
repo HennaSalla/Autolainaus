@@ -26,6 +26,9 @@
       <height>81</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ottaa äänet käyttöön&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -48,6 +51,9 @@
       <width>75</width>
       <height>81</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Vaimentaa äänet&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="text">
      <string/>
@@ -313,7 +319,7 @@
      <string notr="true">color: rgb(75, 188, 197);</string>
     </property>
     <property name="text">
-     <string>Palaa takaisin</string>
+     <string>KUMOA</string>
     </property>
    </widget>
    <widget class="QLabel" name="hourLabel">
@@ -397,7 +403,7 @@
      <string notr="true">color: rgb(75, 188, 197);</string>
     </property>
     <property name="text">
-     <string>Ok</string>
+     <string>OK</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="keysReturnLineEdit">

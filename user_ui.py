@@ -151,7 +151,13 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+#if QT_CONFIG(tooltip)
+        self.soundOnPushButton.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Ottaa \u00e4\u00e4net k\u00e4ytt\u00f6\u00f6n</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
         self.soundOnPushButton.setText("")
+#if QT_CONFIG(tooltip)
+        self.soundOffPushButton.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">Vaimentaa \u00e4\u00e4net</span></p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
         self.soundOffPushButton.setText("")
         self.takeCarPushButton.setText(QCoreApplication.translate("MainWindow", u"Lainaa auto", None))
         self.returnCarPushButton.setText(QCoreApplication.translate("MainWindow", u"Palauta auto", None))
@@ -166,11 +172,11 @@ class Ui_MainWindow(object):
         self.licenseLineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Lue ajokortti", None))
         self.calenderLabel.setText("")
         self.dateLabel.setText(QCoreApplication.translate("MainWindow", u"27.1.2025", None))
-        self.goBackPushButton.setText(QCoreApplication.translate("MainWindow", u"Palaa takaisin", None))
+        self.goBackPushButton.setText(QCoreApplication.translate("MainWindow", u"KUMOA", None))
         self.hourLabel.setText(QCoreApplication.translate("MainWindow", u"10.09", None))
         self.nameLabel.setText(QCoreApplication.translate("MainWindow", u"Lainaajan nimi", None))
         self.carInfoLabel.setText(QCoreApplication.translate("MainWindow", u"Merkki ja Malli", None))
-        self.okPushButton.setText(QCoreApplication.translate("MainWindow", u"Ok", None))
+        self.okPushButton.setText(QCoreApplication.translate("MainWindow", u"OK", None))
         self.keysReturnLineEdit.setText("")
         self.keysReturnLineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Lue avain", None))
     # retranslateUi

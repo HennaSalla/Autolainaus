@@ -6,8 +6,13 @@
 # ----------------------------------
 import os # Polkumääritykset
 import sys # Käynnistysargumentit
+import json # JSON-tiedoston käsittely
 
 from PySide6 import QtWidgets # Qt-vimpaimet
+
+from lendingModules import sound # Äänikomennot
+from lendingModules import dbOperations # Tietokantatoiminnot
+from lendingModules import cipher # Salausmoduuli
 
 # Tuodaan käyttöliittymän Pythoniksi käänetty tiedosto
 from user_ui import Ui_MainWindow # Käännetyn käyttöliittymän luokka
@@ -26,8 +31,27 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Kutsutaan käyttöliittymän muodostusmetodia setupUi
         self.ui.setupUi(self)
 
+        # Rutiini, joka lukee asetukset, jos ne ovat olemassa
+        try:
+            # Avataam asetustiedosto ja muutetaan se Python sanakirjaksi
+            with open('settings.json', 'rt') as settingsFile: # With sulkee tiedoston automaattisesti
+                
+                jsonData = settingsFile.read()
+                self.currentSettings = json.loads(jsonData)
+
+            # Puretaan salasana tietokannan käyttöä varten
+            self.plainTextPassword = cipher.decryptString(self.currentSettings['password'])
+
+        except Exception as error:
+            self.openWarning()
+
+        # Äänet oletuksena käytössä
+        self.soundOn = True
+
         # Ohjelmaa käynnistäessä piilotetaan tarpeettomat elementit
         self.setInitialElements()
+
+        self.ui.statusbar.showMessage('Valitse Lainaa auto tai Palauta auto')
 
 
 
@@ -52,7 +76,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Kun Ok-painiketta on painettu talenna tiedot ja palauta käyttöliittymä alkutilaan
         self.ui.okPushButton.clicked.connect(self.saveLendingData)
-        
+
+        # Kun palauttaessa on luettu avaimen viivakoodi kutsutaan returnStart metodia
+        self.ui.keysReturnLineEdit.returnPressed.connect(self.returnStart)
+
     # OHJELMOIDUT SLOTIT
     # ------------------
 
@@ -63,10 +90,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.soundOnPushButton.hide()
         self.ui.borrowerLabel.hide()
         self.ui.humanLabel.hide()
+        self.ui.licenseLineEdit.clear()
         self.ui.licenseLineEdit.hide()
         self.ui.nameLabel.hide()
         self.ui.carTakeLabel.hide()
         self.ui.carKeysLabel.hide()
+        self.ui.keysLineEdit.clear()
         self.ui.keysLineEdit.hide()
         self.ui.carInfoLabel.hide()
         self.ui.calenderLabel.hide()
@@ -75,6 +104,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.hourLabel.hide()
         self.ui.goBackPushButton.hide()
         self.ui.okPushButton.hide()
+        self.ui.keysReturnLineEdit.clear()
         self.ui.keysReturnLineEdit.hide()
 
     # Kuin Aloita lainaus nappia on painettu nämä componentit tulee esiin tai piiloutuu
@@ -87,6 +117,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.returnCarPushButton.hide()
         self.ui.takeCarPushButton.hide()
         self.ui.statusbar.showMessage('Lue ajokortin viivakoodi')
+        if self.soundOn:
+            sound.playWav('sounds\\drivingLicence.WAV')
 
     # Ajokortin lukemisen jälkeen nämä komponentint tulevat essin
     def showKeys(self):
@@ -96,6 +128,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.keysLineEdit.show()
         self.ui.keysLineEdit.setFocus()
         self.ui.statusbar.showMessage('Lue avaimen viivakoodi')
+        if self.soundOn:
+            sound.playWav('sounds\\readKey.WAV')
 
     # Kuin avaimen viivakoodi on luettu nämä komponentit tulevat essin
     def showTime(self):
@@ -106,33 +140,69 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.hourLabel.show()
         self.ui.okPushButton.show()
         self.ui.statusbar.showMessage('Jos tiedot on oikein paina Ok painiketta')
+        if self.soundOn:
+            sound.playWav('sounds\\saveData.WAV')
 
     def saveLendingData(self):
         # tallenna tiedot tietokantaan
-        self.setInitialElements()
-        self.ui.statusbar.showMessage('Lainaustiedot on tallenettu', 5000)
+        # Luetaan tietokanta-asetukset paikallisiin muuttujiin
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword # Vaihdetaan selväkieliseksi 
 
-    # mykistäessä nämä komponentit tulevat esiin tai piilotetaan
+        # Luodaan tietokantayhteys-olio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+        ssn = self.ui.licenseLineEdit.text()
+        key = self.ui.keysLineEdit.text()
+        dataDictionary = {'hetu': ssn,
+                          'rekisterinumero': key}
+        dbConnection.addToTable('lainaus', dataDictionary)
+
+        self.setInitialElements()
+        self.ui.statusbar.showMessage('Lainaus tiedot on tallenettu', 5000)
+        if self.soundOn:
+            sound.playWav('sounds\\lendingOk.WAV')
+
+    # Mykistetään äänet
     def muteSound(self):
         self.ui.soundOnPushButton.show()
         self.ui.soundOffPushButton.hide()
+        self.ui.statusbar.showMessage('Äänet mykistetty', 5000)
+        self.soundOn = False
 
-    # Kuin ääni palautetaan nämä komponentitn tulevat esiin tai piilotetaan
+    # Palutetaan äänet
     def takeSound(self):
         self.ui.soundOffPushButton.show()
         self.ui.soundOnPushButton.hide()
+        self.ui.statusbar.showMessage('Äänet päällä', 5000)
+        self.soundOn = True
 
     # Kuin aloita palautus nappia on painettu nämä komponentit tulevat näkyviin tai piiloutuu
     def returnCar(self):
-        pass
+        self.ui.carTakeLabel.show()
+        self.ui.carKeysLabel.show()
+        self.ui.keysReturnLineEdit.show()
+        self.ui.keysReturnLineEdit.setFocus()
+        self.ui.goBackPushButton.show()
+        self.ui.takeCarPushButton.hide()
+        self.ui.returnCarPushButton.hide()
+        self.ui.statusbar.showMessage('Lue avaimen viivakoodi')
+        if self.soundOn:
+            sound.playWav('sounds\\redKey.WAV')
+
+
+    # Kumoa painikkeen painamisen jälkeen palataan alkunäkymään
+    def returnStart(self):
+        self.setInitialElements()
+        self.ui.statusbar.showMessage('Palattu alkunäkymään',5000)
     
 
     # Avataan MessageBox
     def openWarning(self):
         msgBox = QtWidgets.QMessageBox()
         msgBox.setIcon(QtWidgets.QMessageBox.Critical)
-        msgBox.setWindowTitle('Hirveetä!')
-        msgBox.setText('Jotain kamalaa tapahtui')
+        msgBox.setWindowTitle('Tietokantayhteyttä ei voitu muodostaa')
+        msgBox.setText('Ota yhteyttä ')
         msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msgBox.exec()
 
