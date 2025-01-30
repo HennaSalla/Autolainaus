@@ -53,8 +53,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             # Puretaan salasana tietokannan käyttöä varten
             self.plainTextPassword = cipher.decryptString(self.currentSettings['password'])
 
-            # Huom! Salasana pitää tallentaa JSON-tiedostoon tavallisena merkkijonona,
-            # ei byte string muodossa. Salauskirjaston decode ja encode metodit hoitavat asian
+            # Huom! Salasana pitää tallentaa JSON-tiedostoon tavallisena merkkijonona, ei byte string muodossa. Salauskirjaston decode ja encode metodit hoitavat asian
 
             # Päivitetään käyttöliittymäelementtien tiedot tietokannasta
             self.refreshUi()
