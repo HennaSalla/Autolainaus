@@ -8,7 +8,7 @@ import os # Polkumääritykset
 import sys # Käynnistysargumentit
 import json # JSON-tiedoston käsittely
 
-from datetime import date, time # Tuodaan päivä ja kellon aika mahdollisuudet
+import time # Tuodaan aika ja päivä muokkaus mahdollisuudet
 
 from PySide6 import QtWidgets # Qt-vimpaimet
 from PySide6.QtCore import QThreadPool, Slot # Säikeistys ja Slot-dekoraattori
@@ -58,7 +58,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setInitialElements()
 
         self.ui.statusbar.showMessage('Valitse Lainaa auto tai Palauta auto')
-
 
 
         # OHJELMOIDUT SIGNAALIT
@@ -117,6 +116,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.keysReturnLineEdit.hide()
         self.ui.carKeysReturnLabel.hide()
         self.ui.carTakeReturnLabel.hide()
+        self.ui.veachleLabel.hide()
+        self.ui.carLabel.hide()
 
     # Kuin Aloita lainaus nappia on painettu nämä componentit tulee esiin tai piiloutuu
     @Slot()
@@ -130,6 +131,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.takeCarPushButton.hide()
         self.ui.statusbar.showMessage('Lue ajokortin viivakoodi')
         self.threadPool.start(self.playWavFile)
+    # Soitetaan äänitiedosto
     @Slot()
     def playWavFile(self):
         sound.playWav('sounds\\drivingLicence.wav')
@@ -137,6 +139,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     # Ajokortin lukemisen jälkeen nämä komponentint tulevat essin
     @Slot()
     def showKeys(self):
+        self.ui.licenseLineEdit.hide()
         self.ui.nameLabel.show()
         self.ui.carTakeLabel.show()
         self.ui.carKeysLabel.show()
@@ -144,9 +147,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.keysLineEdit.setFocus()
         self.ui.statusbar.showMessage('Lue avaimen viivakoodi')
         self.threadPool.start(self.playWavKeys)
+
+    # Soitetaan äänitiedosto
     @Slot()
     def playWavKeys(self):
-        sound.playWav('sounds\\readKey.wav')
+        sound.playWav('sounds\\readKey.WAV')
 
     # Kuin avaimen viivakoodi on luettu nämä komponentit tulevat essin
     @Slot()
@@ -156,9 +161,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.dateLabel.show()
         self.ui.clockPictureLabel.show()
         self.ui.hourLabel.show()
+        self.ui.veachleLabel.show()
+        self.ui.carLabel.show()
         self.ui.okPushButton.show()
         self.ui.statusbar.showMessage('Jos tiedot on oikein paina Ok painiketta')
         self.threadPool.start(self.playWavData)
+        self.ui.dateLabel.setText(f'{time.strftime('%d.%m.%Y')}')
+        self.ui.hourLabel.setText(f'{time.strftime('%H:%M')}')
+
+    # Soitetaan äänitiedosto
     @Slot()
     def playWavData(self):
         sound.playWav('sounds\\saveData.wav')
@@ -170,21 +181,30 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         dbSettings = self.currentSettings
         plainTextPassword = self.plainTextPassword
         dbSettings['password'] = plainTextPassword # Vaihdetaan selväkieliseksi 
-        # TODO: Laita seuraava lohko virheenkäsittelyn sisälle
-        # Luodaan tietokantayhteys-olio
-        dbConnection = dbOperations.DbConnection(dbSettings)
-        ssn = self.ui.licenseLineEdit.text()
-        key = self.ui.keysLineEdit.text()
-        dataDictionary = {'hetu': ssn,
+        
+        try:
+            # Luodaan tietokantayhteys-olio
+            dbConnection = dbOperations.DbConnection(dbSettings)
+            ssn = self.ui.licenseLineEdit.text()
+            key = self.ui.keysLineEdit.text()
+            dataDictionary = {'hetu': ssn,
                           'rekisterinumero': key}
-        dbConnection.addToTable('lainaus', dataDictionary)
+            dbConnection.addToTable('lainaus', dataDictionary)
 
-        self.setInitialElements()
-        self.ui.statusbar.showMessage('Lainaus tiedot on tallenettu', 5000)
-        self.threadPool.start(self.playWavOk)
+            self.setInitialElements()
+            self.ui.statusbar.showMessage('Lainaus tiedot on tallenettu', 5000)
+            self.threadPool.start(self.playWavOk)
+
+        except Exception as e:
+            title = 'Lainaustietojen tallentaminen ei onnistu'
+            text = 'Ajokortin tai auton tiedot virheeliset, ota yhteys henkilökuntaan!'
+            detailedText = str(e)
+            self.openWarning(title, text, detailedText)
+    
     @Slot()
     def playWavOk(self):
         sound.playWav('sounds\\lendingOk.wav')
+
 
     # Mykistetään äänet
     def muteSound(self):
@@ -211,6 +231,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.returnCarPushButton.hide()
         self.ui.statusbar.showMessage('Lue avaimen viivakoodi')
         self.threadPool.start(self.playWavReturn)
+
+    # Soitetaan äänitiedosto
     @Slot()
     def playWavReturn(arg):
         sound.playWav('sounds\\redKey.wav')
@@ -227,12 +249,20 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.statusbar.showMessage('Toiminto peruutettiin', 5000)
     
 
-    # Avataan MessageBox
-    def openWarning(self):
+    # Malli mahdollista virheilmoitusta varten
+    def openWarning(self, title: str, text: str, detailedText:str) -> None:
+        """Opens a message box for errors
+
+        Args:
+            title (str): The title of the message box
+            text (str): Error message
+            detailedText (str): Detailed error message
+        """
         msgBox = QtWidgets.QMessageBox()
         msgBox.setIcon(QtWidgets.QMessageBox.Critical)
-        msgBox.setWindowTitle('Tietokantayhteyttä ei voitu muodostaa')
-        msgBox.setText('Ota yhteys järjestelmän valvojaan')
+        msgBox.setWindowTitle(title)
+        msgBox.setText(text)
+        msgBox.setDetailedText(detailedText)
         msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok)
         msgBox.exec()
 
