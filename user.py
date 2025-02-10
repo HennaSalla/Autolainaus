@@ -116,9 +116,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.keysReturnLineEdit.hide()
         self.ui.carKeysReturnLabel.hide()
         self.ui.carTakeReturnLabel.hide()
-        self.ui.veachleLabel.hide()
-        self.ui.carLabel.hide()
+        self.ui.freeCarLabel.show()
+        self.ui.freeCarPlainTextEdit.show()
+        self.ui.drivingCarLabel.show()
+        self.ui.drivingCarPlainTextEdit.show()
 
+    # Soitetaan äänitiedosto
+    @Slot()
+    def playWavFile(self):
+        sound.playWav('sounds\\drivingLicence.wav')
+    
     # Kuin Aloita lainaus nappia on painettu nämä componentit tulee esiin tai piiloutuu
     @Slot()
     def takeCar(self):
@@ -129,12 +136,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.licenseLineEdit.setFocus()
         self.ui.returnCarPushButton.hide()
         self.ui.takeCarPushButton.hide()
+        self.ui.freeCarLabel.hide()
+        self.ui.freeCarPlainTextEdit.hide()
+        self.ui.drivingCarLabel.hide()
+        self.ui.drivingCarPlainTextEdit.hide()
         self.ui.statusbar.showMessage('Lue ajokortin viivakoodi')
-        self.threadPool.start(self.playWavFile)
+        if self.soundOn:
+            self.threadPool.start(self.playWavFile)
+
     # Soitetaan äänitiedosto
     @Slot()
-    def playWavFile(self):
-        sound.playWav('sounds\\drivingLicence.wav')
+    def playWavKeys(self):
+        sound.playWav('sounds\\readKey.WAV')
 
     # Ajokortin lukemisen jälkeen nämä komponentint tulevat essin
     @Slot()
@@ -146,12 +159,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.keysLineEdit.show()
         self.ui.keysLineEdit.setFocus()
         self.ui.statusbar.showMessage('Lue avaimen viivakoodi')
-        self.threadPool.start(self.playWavKeys)
+        if self.soundOn:
+            self.threadPool.start(self.playWavKeys)
 
     # Soitetaan äänitiedosto
     @Slot()
-    def playWavKeys(self):
-        sound.playWav('sounds\\readKey.WAV')
+    def playWavData(self):
+        sound.playWav('sounds\\saveData.wav')
 
     # Kuin avaimen viivakoodi on luettu nämä komponentit tulevat essin
     @Slot()
@@ -161,18 +175,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.dateLabel.show()
         self.ui.clockPictureLabel.show()
         self.ui.hourLabel.show()
-        self.ui.veachleLabel.show()
-        self.ui.carLabel.show()
         self.ui.okPushButton.show()
         self.ui.statusbar.showMessage('Jos tiedot on oikein paina Ok painiketta')
-        self.threadPool.start(self.playWavData)
         self.ui.dateLabel.setText(f'{time.strftime('%d.%m.%Y')}')
         self.ui.hourLabel.setText(f'{time.strftime('%H:%M')}')
+        if self.soundOn:
+            self.threadPool.start(self.playWavData)
 
-    # Soitetaan äänitiedosto
     @Slot()
-    def playWavData(self):
-        sound.playWav('sounds\\saveData.wav')
+    def playWavOk(self):
+        sound.playWav('sounds\\lendingOk.wav')
 
     @Slot()
     def saveLendingData(self):
@@ -193,17 +205,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
             self.setInitialElements()
             self.ui.statusbar.showMessage('Lainaus tiedot on tallenettu', 5000)
-            self.threadPool.start(self.playWavOk)
+            if self.soundOn:
+                self.threadPool.start(self.playWavOk)
 
         except Exception as e:
             title = 'Lainaustietojen tallentaminen ei onnistu'
             text = 'Ajokortin tai auton tiedot virheeliset, ota yhteys henkilökuntaan!'
             detailedText = str(e)
             self.openWarning(title, text, detailedText)
-    
-    @Slot()
-    def playWavOk(self):
-        sound.playWav('sounds\\lendingOk.wav')
+
 
 
     # Mykistetään äänet
@@ -220,6 +230,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.statusbar.showMessage('Äänet päällä', 5000)
         self.soundOn = True
 
+    # Soitetaan äänitiedosto
+    @Slot()
+    def playWavReturn(arg):
+        sound.playWav('sounds\\redKey.wav')
+            
+
     # Kuin aloita palautus nappia on painettu nämä komponentit tulevat näkyviin tai piiloutuu
     def returnCar(self):
         self.ui.carTakeReturnLabel.show()
@@ -229,14 +245,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.goBackPushButton.show()
         self.ui.takeCarPushButton.hide()
         self.ui.returnCarPushButton.hide()
+        self.ui.freeCarLabel.hide()
+        self.ui.freeCarPlainTextEdit.hide()
+        self.ui.drivingCarLabel.hide()
+        self.ui.drivingCarPlainTextEdit.hide()
         self.ui.statusbar.showMessage('Lue avaimen viivakoodi')
-        self.threadPool.start(self.playWavReturn)
-
-    # Soitetaan äänitiedosto
-    @Slot()
-    def playWavReturn(arg):
-        sound.playWav('sounds\\redKey.wav')
-            
+        if self.soundOn:
+            self.threadPool.start(self.playWavReturn)
 
 
     # Kumoa painikkeen painamisen jälkeen palataan alkunäkymään
