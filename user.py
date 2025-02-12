@@ -49,7 +49,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.plainTextPassword = cipher.decryptString(self.currentSettings['password'])
 
         except Exception as error:
-            self.openWarning()
+            title = 'Tietokanta-asetusten luku ei onnistunut'
+            text = 'Tietokanta-asetuksien avaaminen ja salasanan purku ei onnistunut'
+            detailedText = str(error)
+            self.openWarning(title, text, detailedText)
 
         # Äänet oletuksena käytössä
         self.soundOn = True
@@ -120,6 +123,36 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.freeCarPlainTextEdit.show()
         self.ui.drivingCarLabel.show()
         self.ui.drivingCarPlainTextEdit.show()
+
+        # Luetaan tietokanta-asetukset paikallisiin muutujiin
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword # Vaidetaan selväkieliseksi
+
+        try:
+            #Luodaan tietokantayhteys-olio
+            dbConnection = dbOperations.DbConnection(dbSettings)
+            freeVehicles = dbConnection.readAllColumnsFromTable('vapaana')
+
+            # Märitellään vapaana olevien autojen tiedot freeCarPlainTextEdit-elementtiin
+            availableVheiclesData = ''
+            text = ''
+
+            for vehiclTtuple in freeVehicles:
+                rowData = ''
+                for vehicleData in vehicleTtuole:
+                    rowData = rowData + f'{vehicleData}'
+                text = rowData + 'henkilöä\n'
+                availableVehiclesData = availableVehiclesData + text
+
+           self.ui.freeCarPlainTextEdit.setPlainText(availableVehiclesData)
+        except Exception as e:
+           title = 'Autojen lukeminen ei onnistunut'
+           text = 'Vapaiden autojen tiedot eivät ole saatavissa'
+           detailedText = str(e)
+           self.openWarning(titel, text, detailedText)
+       # TODO: Lisää rutiini, joka hakee ajossa olevat autot
+
 
     # Soitetaan äänitiedosto
     @Slot()
@@ -237,6 +270,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             
 
     # Kuin aloita palautus nappia on painettu nämä komponentit tulevat näkyviin tai piiloutuu
+    @Slot()
     def returnCar(self):
         self.ui.carTakeReturnLabel.show()
         self.ui.carKeysReturnLabel.show()
