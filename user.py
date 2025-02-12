@@ -194,6 +194,27 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.statusbar.showMessage('Lue avaimen viivakoodi')
         if self.soundOn:
             self.threadPool.start(self.playWavKeys)
+        # Luetaan tietokannasta lainaajan nimi
+        # TODO: luetaan tietokannasta lainaajan nimi
+        # Luetaan tietokanta-asetukset paikallisiin muutujiin
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword # Vaidetaan selväkieliseksi
+        # Luetaan lainaajan tiedoista etunimi ja sukunimi
+        try:
+            # Luodaan tietokanta yhteys
+            dbConnection = dbOperation.DbConnection(dbSettings)
+            criteria = f'hetu = "{self.ui.nameLabel.text()}"'
+            resaultSet = dbConnection = filterColumnsFromTable('lainaaja', ['etunimi', 'sukunimi'], criteria)
+            row = resultSet[0]
+            lederName = f'{row[0]} {row[1]}'
+            self.ui.nameLabel.setText(lenderName)
+                
+        except Exception as e:
+           title = 'Ajokotin lukeminen ei onnistunut'
+           text = 'Ajokortin tietoja ei löytynyt, ota yhteys henkilökuntaan'
+           detailedText = str(e)
+           self.openWarning(titel, text, detailedText)
 
     # Soitetaan äänitiedosto
     @Slot()
@@ -210,10 +231,47 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.hourLabel.show()
         self.ui.okPushButton.show()
         self.ui.statusbar.showMessage('Jos tiedot on oikein paina Ok painiketta')
-        self.ui.dateLabel.setText(f'{time.strftime('%d.%m.%Y')}')
-        self.ui.hourLabel.setText(f'{time.strftime('%H:%M')}')
+        #self.ui.dateLabel.setText(f'{time.strftime('%d.%m.%Y')}')
+        #self.ui.hourLabel.setText(f'{time.strftime('%H:%M')}')
         if self.soundOn:
             self.threadPool.start(self.playWavData)
+        # Päivitetään auton tiedot
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword # Vaidetaan selväkieliseksi
+        # Luetaan lainaajan tiedoista etunimi ja sukunimi
+        try:
+            # Luodaan tietokanta yhteys
+            dbConnection = dbOperation.DbConnection(dbSettings)
+            criteria = f'rekisterinumero = "{self.ui.carInfoLabel.text()}"'
+            resaultSet = dbConnection = filterColumnsFromTable('auto', ['merkki', 'malli', 'henkilomaara'], criteria)
+            row = resultSet[0]
+            carData = f'{row[0]} {row[1]} \n {row[2]}-paikkainen'
+            self.ui.carInfoLabel.setText(carData)
+                
+        except Exception as e:
+           title = 'Ajokotin lukeminen ei onnistunut'
+           text = 'Ajokortin tietoja ei löytynyt, ota yhteys henkilökuntaan'
+           detailedText = str(e)
+           self.openWarning(titel, text, detailedText)
+
+        try:
+            dbConnection = dbOperation.DbConnection(dbSettings)
+            timeStamp = dbConnection.getPgTimeStamp()
+            rowValue = timeStamp[0]
+            columnValue = rowValue[0]
+            # Ensimäiset 10 merkkiä on päivämäärää
+            date = columnValue[0:10]
+            # Merkit 12-17 ovat kellonaika minuuttien tarkuudella
+            time = columnValue[11:16]
+
+            self.ui.dateLabel.setText(date)
+            self.ui.hourLabel.setText(time)
+        except Exception as e:
+           title = 'Aikaleiman lukeminen ei onnistunut'
+           text = 'Yhteys palvelimeen on katkennut, tee lainaus uudelleen'
+           detailedText = str(e)
+           self.openWarning(titel, text, detailedText)
 
     @Slot()
     def playWavOk(self):
