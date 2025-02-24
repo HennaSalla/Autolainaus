@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QLabel, QLineEdit,
-    QMainWindow, QMenuBar, QPlainTextEdit, QPushButton,
-    QSizePolicy, QStatusBar, QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QFrame, QLabel,
+    QLineEdit, QMainWindow, QMenuBar, QPlainTextEdit,
+    QPushButton, QSizePolicy, QStatusBar, QWidget)
 import userUiRescources_rc
 
 class Ui_MainWindow(object):
@@ -28,20 +28,6 @@ class Ui_MainWindow(object):
         MainWindow.setStyleSheet(u"background-color: rgb(0, 33, 72);")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.soundOnPushButton = QPushButton(self.centralwidget)
-        self.soundOnPushButton.setObjectName(u"soundOnPushButton")
-        self.soundOnPushButton.setGeometry(QRect(460, 0, 75, 81))
-        icon = QIcon()
-        icon.addFile(u":/pictures/uiPictrues/soundsOn.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.soundOnPushButton.setIcon(icon)
-        self.soundOnPushButton.setIconSize(QSize(70, 70))
-        self.soundOffPushButton = QPushButton(self.centralwidget)
-        self.soundOffPushButton.setObjectName(u"soundOffPushButton")
-        self.soundOffPushButton.setGeometry(QRect(460, 0, 75, 81))
-        icon1 = QIcon()
-        icon1.addFile(u":/pictures/uiPictrues/soundOff.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.soundOffPushButton.setIcon(icon1)
-        self.soundOffPushButton.setIconSize(QSize(70, 70))
         self.takeCarPushButton = QPushButton(self.centralwidget)
         self.takeCarPushButton.setObjectName(u"takeCarPushButton")
         self.takeCarPushButton.setGeometry(QRect(70, -10, 181, 91))
@@ -68,7 +54,7 @@ class Ui_MainWindow(object):
         self.borrowerLabel.setStyleSheet(u"color: rgb(75, 188, 197);")
         self.carTakeLabel = QLabel(self.centralwidget)
         self.carTakeLabel.setObjectName(u"carTakeLabel")
-        self.carTakeLabel.setGeometry(QRect(400, 50, 61, 31))
+        self.carTakeLabel.setGeometry(QRect(380, 50, 61, 31))
         self.carTakeLabel.setFont(font1)
         self.carTakeLabel.setStyleSheet(u"color: rgb(75, 188, 197);")
         self.carKeysLabel = QLabel(self.centralwidget)
@@ -120,7 +106,7 @@ class Ui_MainWindow(object):
         self.nameLabel.setStyleSheet(u"color: rgb(75, 188, 197);")
         self.carInfoLabel = QLabel(self.centralwidget)
         self.carInfoLabel.setObjectName(u"carInfoLabel")
-        self.carInfoLabel.setGeometry(QRect(340, 340, 161, 41))
+        self.carInfoLabel.setGeometry(QRect(340, 340, 161, 81))
         self.carInfoLabel.setFont(font1)
         self.carInfoLabel.setStyleSheet(u"color: rgb(75, 188, 197);")
         self.okPushButton = QPushButton(self.centralwidget)
@@ -157,7 +143,7 @@ class Ui_MainWindow(object):
         self.drivingCarLabel.setStyleSheet(u"color: rgb(75, 188, 197);")
         self.freeCarPlainTextEdit = QPlainTextEdit(self.centralwidget)
         self.freeCarPlainTextEdit.setObjectName(u"freeCarPlainTextEdit")
-        self.freeCarPlainTextEdit.setGeometry(QRect(280, 120, 271, 641))
+        self.freeCarPlainTextEdit.setGeometry(QRect(10, 110, 271, 641))
         font2 = QFont()
         font2.setPointSize(12)
         self.freeCarPlainTextEdit.setFont(font2)
@@ -169,13 +155,21 @@ class Ui_MainWindow(object):
         self.freeCarPlainTextEdit.setLineWidth(3)
         self.drivingCarPlainTextEdit = QPlainTextEdit(self.centralwidget)
         self.drivingCarPlainTextEdit.setObjectName(u"drivingCarPlainTextEdit")
-        self.drivingCarPlainTextEdit.setGeometry(QRect(10, 120, 261, 641))
+        self.drivingCarPlainTextEdit.setGeometry(QRect(290, 110, 261, 641))
         self.drivingCarPlainTextEdit.setFont(font2)
         self.drivingCarPlainTextEdit.setStyleSheet(u"color: rgb(75, 188, 197);\n"
 "border-color: rgb(75, 188, 197);")
         self.drivingCarPlainTextEdit.setFrameShape(QFrame.Shape.WinPanel)
         self.drivingCarPlainTextEdit.setFrameShadow(QFrame.Shadow.Plain)
         self.drivingCarPlainTextEdit.setLineWidth(3)
+        self.soundCheckBox = QCheckBox(self.centralwidget)
+        self.soundCheckBox.setObjectName(u"soundCheckBox")
+        self.soundCheckBox.setGeometry(QRect(450, 10, 91, 81))
+        self.soundCheckBox.setStyleSheet(u"background-color: rgb(0, 57, 122);")
+        icon = QIcon()
+        icon.addFile(u":/pictures/uiPictrues/soundsOn.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.soundCheckBox.setIcon(icon)
+        self.soundCheckBox.setIconSize(QSize(70, 70))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
@@ -194,14 +188,6 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-#if QT_CONFIG(tooltip)
-        self.soundOnPushButton.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Ottaa \u00e4\u00e4net k\u00e4ytt\u00f6\u00f6n</p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.soundOnPushButton.setText("")
-#if QT_CONFIG(tooltip)
-        self.soundOffPushButton.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:11pt;\">Vaimentaa \u00e4\u00e4net</span></p></body></html>", None))
-#endif // QT_CONFIG(tooltip)
-        self.soundOffPushButton.setText("")
         self.takeCarPushButton.setText(QCoreApplication.translate("MainWindow", u"Lainaa auto", None))
         self.returnCarPushButton.setText(QCoreApplication.translate("MainWindow", u"Palauta auto", None))
         self.humanLabel.setText("")
@@ -230,5 +216,6 @@ class Ui_MainWindow(object):
 "ABC-123 VW Transporter 3 henkil\u00f6\u00e4", None))
         self.drivingCarPlainTextEdit.setPlainText(QCoreApplication.translate("MainWindow", u"DSE-546 Nissan Micra 5 henkil\u00f6\u00e4\n"
 "", None))
+        self.soundCheckBox.setText(QCoreApplication.translate("MainWindow", u"CheckBox", None))
     # retranslateUi
 

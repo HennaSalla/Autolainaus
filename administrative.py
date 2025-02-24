@@ -11,6 +11,7 @@ import json # JSON-objektien ja tiedostojen käsittely
 
 # Asennuksen vaativat kirjastot
 from PySide6 import QtWidgets # Qt-vimpaimet
+from PySide6 import QtGui
 
 
 # Käyttöliittymämoduulien lataukset
@@ -80,6 +81,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.saveGroupPushButton.clicked.connect(self.saveGroup)
         self.ui.savePersonPushButton.clicked.connect(self.savePerson)
         self.ui.saveVehiclePushButton.clicked.connect(self.saveVehicle)
+        #TODO: Painike OpenPictureButton klikkaus kutsuu openPicture-dialogia
+        self.ui.openPicturePushButton.clicked.connect(self.openPicture)
         
     # OHJELMOIDUT SLOTIT
     # ==================
@@ -125,13 +128,26 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Tehdään lista ryhmät-yhdistelmäruudun arvoista
         groupList = dbConnection.readColumsFromTable('ryhma', ['ryhma'])
-
         groupStringList = []
         for item in groupList:
             stringValue = str(item[0])
             groupStringList.append(stringValue)
         self.ui.groupComboBox.clear()
         self.ui.groupComboBox.addItems(groupStringList)
+
+        # Tehdään lista ajoneuvotyypit-yhdistelmäruudun arvoista
+        # Luodaan tietokanta yhteys-olio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Tehdään lista ryhmät-yhdistelmäruudun arvoista
+        groupList = dbConnection.readColumsFromTable('ajoneuvotyyppi', ['tyyppi'])
+        groupStringList = []
+        for item in groupList:
+            stringValue = str(item[0])
+            groupStringList.append(stringValue)
+        self.ui.vehicleTypeComboBox.clear()
+        self.ui.vehicleTypeComboBox.addItems(groupStringList)
+
 
     # Lainaajat-taulukon päivitys
     def updateLenderTableWidget(self):
@@ -174,7 +190,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         print('Autotaulun tiedot:', tableData)
 
         # Määritellään taulukkoelementin otsikot
-        headerRow = ['Rekisteri', 'Merkki', 'Malli', 'Vuosimalli', 'Henkilömäärä']
+        headerRow = ['Rekisteri', 'Merkki', 'Malli', 'Vuosimalli', 'Henkilömäärä', 'Tyyppi', 'vastuuhenkilo']
         self.ui.vehicleCatalogTableWidget.setHorizontalHeaderLabels(headerRow)
 
         # Asetetaan taulukon solujen arvot
@@ -274,6 +290,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.updateLenderTableWidget()
         except Exception as e:
             self.openWarning('Tallennus ei onnistunut', str(e))
+
+    # TODO: Ajoneuvon kuvan lataaminen
+    def openPicture(self):
+        userPath = os.path.expanduser('~')
+        pathToPictureFolder = userPath + '\\Pictures'
+        fileName, check = QtWidgets.QFileDialog.getOpenFileName(None, 'Valitse auton kuva', pathToPictureFolder, 'Kuvat (*png, *.jpg)')
+
+        # Jos kuvatiedosto on valittu
+        vehiclePicture = QtGui.QPixmap(fileName)
+        self.ui.vehiclePictureLabel.setPixmap(vehiclePicture)
 
 
     # Ajoneuvon tallennus

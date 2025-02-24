@@ -17,58 +17,6 @@
    <string notr="true">background-color: rgb(0, 33, 72);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="soundOnPushButton">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>0</y>
-      <width>75</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="toolTip">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ottaa äänet käyttöön&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset resource="userUiRescources.qrc">
-      <normaloff>:/pictures/uiPictrues/soundsOn.png</normaloff>:/pictures/uiPictrues/soundsOn.png</iconset>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>70</width>
-      <height>70</height>
-     </size>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="soundOffPushButton">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>0</y>
-      <width>75</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="toolTip">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;Vaimentaa äänet&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset resource="userUiRescources.qrc">
-      <normaloff>:/pictures/uiPictrues/soundOff.png</normaloff>:/pictures/uiPictrues/soundOff.png</iconset>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>70</width>
-      <height>70</height>
-     </size>
-    </property>
-   </widget>
    <widget class="QPushButton" name="takeCarPushButton">
     <property name="geometry">
      <rect>
@@ -154,7 +102,7 @@
    <widget class="QLabel" name="carTakeLabel">
     <property name="geometry">
      <rect>
-      <x>400</x>
+      <x>380</x>
       <y>50</y>
       <width>61</width>
       <height>31</height>
@@ -373,7 +321,7 @@
       <x>340</x>
       <y>340</y>
       <width>161</width>
-      <height>41</height>
+      <height>81</height>
      </rect>
     </property>
     <property name="font">
@@ -524,8 +472,8 @@
    <widget class="QPlainTextEdit" name="freeCarPlainTextEdit">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>120</y>
+      <x>10</x>
+      <y>110</y>
       <width>271</width>
       <height>641</height>
      </rect>
@@ -557,8 +505,8 @@ ABC-123 VW Transporter 3 henkilöä</string>
    <widget class="QPlainTextEdit" name="drivingCarPlainTextEdit">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>120</y>
+      <x>290</x>
+      <y>110</y>
       <width>261</width>
       <height>641</height>
      </rect>
@@ -584,6 +532,32 @@ border-color: rgb(75, 188, 197);</string>
     <property name="plainText">
      <string>DSE-546 Nissan Micra 5 henkilöä
 </string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="soundCheckBox">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>10</y>
+      <width>91</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 57, 122);</string>
+    </property>
+    <property name="text">
+     <string>CheckBox</string>
+    </property>
+    <property name="icon">
+     <iconset resource="userUiRescources.qrc">
+      <normaloff>:/pictures/uiPictrues/soundsOn.png</normaloff>:/pictures/uiPictrues/soundsOn.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>70</width>
+      <height>70</height>
+     </size>
     </property>
    </widget>
   </widget>

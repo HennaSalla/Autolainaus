@@ -7,8 +7,8 @@
 # ---------------------
 
 # Ladattavat kirjastot
-from sqlite3 import Cursor
-import psycopg2
+import psycopg2 # PostgreSQL-ajuri
+import datetime
 
 # LUOKAT
 # ------
@@ -125,7 +125,7 @@ class DbConnection():
             if currentConnection:
                 cursor.close() # Tuhotaan kursori
                 currentConnection.close() # Tuhotaan yhteys
-
+        
     # Metodi tietojen lukemiseen, taulun valitut sarakkeet
     def readColumsFromTable(self, table: str, columns: list) -> list:
         """Returns all rows from a table. Columns are defined for the result set
@@ -172,8 +172,6 @@ class DbConnection():
                 cursor.close() # Tuhotaan kursori
                 currentConnection.close() # Tuhotaan yhteys
 
-
-    
     # Metodi, jolla hetaan ehdot täyttävät rivit taulusta
     # Metodi tietojen lukemiseen, taulun valitut sarakkeet
     def filterColumsFromTable(self, table: str, columns: list, filter:str) -> list:
@@ -225,9 +223,17 @@ class DbConnection():
                 cursor.close() # Tuhotaan kursori
                 currentConnection.close() # Tuhotaan yhteys
 
-    # TODO: Tee metodi, joka hakee tietokantapalvelimen aikaleiman
+    # Metodi, joka hakee tietokantapalvelimen aikaleiman
     def getPgTimestamp(self) -> str:
-        
+        """Reads PostgreSQL server's current timestamp and converts it to
+        ISO date and time string
+
+        Raises:
+            e: An error message to propagate
+
+        Returns:
+            str: Date, time and timezone in ISO format
+        """
 
         # Yritetään avata yhteys tietokantaan ja hakea tiedot
         try:
@@ -237,16 +243,18 @@ class DbConnection():
             # Luodaan kursori suorittamaan tietokantoperaatiota
             cursor = currentConnection.cursor()
 
-            
-            
             # Määritellään SQL lause, joka palauttaa aikaleiman ja aikavyöhykkeen 
             sqlClause = f'SELECT CURRENT_TIMESTAMP;'
-            print(sqlClause)
+
             # Suoritetaan SQL-lause ja luetaan tulokset kursorista
             cursor.execute(sqlClause)
             records= cursor.fetchall()
             print(records)
-            return records
+            row = records[0] # Listasta monikko (tuple)
+            column = row[0] # Monikosta arvo, joka tulee funktion tuottamana
+            print(column)
+            isoDateTime = f'{column}' # Arvo merkkijonoksi muutettuna
+            return isoDateTime
 
         # Jos tapahtuu virhe, välitetään se luokkaa käyttävälle ohjelmalle
         except (Exception, psycopg2.Error) as e:
@@ -261,19 +269,20 @@ class DbConnection():
 
     # TODO: Tee metodi tietojen muokkaamiseen, yksittäinen sarake
     def modifyTableData(self, table: str, column: str, newValue, criteriaColumn: str, criteriaValue):
-        """Updates a column according to a filtering criteria
-        
+        """Updataes a column according to a filtering criteria
+
         Args:
-            table (str): Name on the table
-            column (str): Name of the column to be updatet
+            table (str): Name of the table
+            column (str): Name of the column to be updated
             newValue (any): The new value for the column
             criteriaColumn (str): A column to use in WHERE-claus
-            criteriaValue (any): The Value of criteria column
-        
+            criteriaValue (any): The value of criteria colunm
+
         Raises:
             e: Error message to be propagated
+
         """
-        # Yritetään avata yhteys tietokantaan ja päivittää tietue
+        # Yritetään avata yhteys tietokantaan ja päivittää tietueita
         try:
             # Luodaan yhteys tietokantaan
             currentConnection = psycopg2.connect(self.connectionString)
@@ -282,8 +291,8 @@ class DbConnection():
             cursor = currentConnection.cursor()
 
             # Määritellään lopullinen SQL-lause
-            sqlClause = f'UPDATE {table} SET {column} = {newValue} WHERE {criteriaColumn} = {criteriaValue}'
-            
+            sqlClause = f'UPDATE {table} SET  {column} = {newValue} WHERE {criteriaColumn} = {criteriaValue}'
+            print(sqlClause)
             # Suoritetaan SQL-lause
             cursor.execute(sqlClause)
 
@@ -298,7 +307,7 @@ class DbConnection():
             # Selvitetään muodostuiko yhteysolio
             if currentConnection:
                 cursor.close() # Tuhotaan kursori
-                currentConnection.close() # Tuhotaan
+                currentConnection.close() # Tuhotaan yhteys
 
     # TODO: Tee metodi tietueen poistamiseen
     def deleterRowsFromTable(self, table, criteriaColumn, criteriaValue):
