@@ -10,7 +10,7 @@ import json # JSON-tiedostojen käsittely
 
 from PySide6 import QtWidgets # Qt-vimpaimet
 from PySide6.QtCore import QThreadPool, Slot, Qt # Säikeistys, slot-dekoraattori ja Qt
-from PySide6.QtGui import (QCursor) # Ohjelmalliset kursorin muutokset
+from PySide6.QtGui import QPixmap # Pixmap mahdollisuus
 
 from lendingModules import sound # Äänitoiminnot
 from lendingModules import dbOperations # Tietokantatoiminnot
@@ -127,6 +127,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.drivingCarLabel.show()
         self.ui.drivingCarPlainTextEdit.show()
         self.ui.okPushButton.setEnabled(True)
+        self.ui.carPicturesLabel.hide()
 
         # Luetaan tietokanta-asetukset paikallisiin muuttujiin
         dbSettings = self.currentSettings
@@ -197,7 +198,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         if self.ui.soundCheckBox.isChecked():
             self.playSoundInTread('readKey.wav')
         
-        # TODO: Luetaan tietokannasta lainaajan nimi
+        # Luetaan tietokannasta lainaajan nimi
         # Luetaan tietokanta-asetukset paikallisiin muutujiin
         dbSettings = self.currentSettings
         plainTextPassword = self.plainTextPassword
@@ -229,6 +230,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.clockPictureLabel.show()
         self.ui.hourLabel.show()
         self.ui.okPushButton.show()
+        self.ui.carPicturesLabel.show()
         self.ui.statusbar.showMessage('Jos tiedot on oikein paina Ok painiketta')
         #self.ui.dateLabel.setText(f'{time.strftime('%d.%m.%Y')}')
         #self.ui.hourLabel.setText(f'{time.strftime('%H:%M')}')
@@ -236,7 +238,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.playSoundInTread('readKey.wav')
 
         # Päivitetään auton tiedot
-        # TODO: Luetaan tietokannasta auton perustiedot
+        # TODO: Lisätään tähän auton kuvan lataus tietokannasta
         # Tietokanta-asetukset
         dbSettings = self.currentSettings
         plainTextPassword = self.plainTextPassword
@@ -253,8 +255,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.ui.carInfoLabel.setText(carData)
 
         except Exception as e:
-            title = 'Avaimenperän lukeminen ei onnistunut'
-            text = 'Auton tietoja ei löytynyt, ota yhteys henkilökuntaan'
+            title = 'Auton lainaaminen ei ole mahdollista'
+            text = 'Auton palautus edellisestä ajosta tekemättä, ota yhteys henkilökuntaan'
             detailedText = str(e)
             self.openWarning(title, text, detailedText)
 
@@ -275,12 +277,24 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             detailedText = str(e)
             self.openWarning(title, text, detailedText)
 
+
+        try:
+            # Luodaan tietokanta yhteys-olio
+            dbConnection = dbOperations.DbConnection(dbSettings)
+            criteria = f"rekisterinumero = '{self.ui.keysLineEdit.text()}'"
+
+            # Haetaan auton kuva auto-taulusta
+            resultSet = dbConnection.filterColumsFromTable('auto', ['kuva'], criteria)
+            row = resultSet[0]
+            picture = {row[0]} # PNG tai JPG kuva tietokannasta
+            print('Kuva on', picture)
+            pixmap = QPixmap(picture)
+            self.ui.carPicturesLabel.setPixmap(pixmap)
+
         except Exception as e:
-            title = 'Aikaleiman lukeminen ei onnistunut'
-            text = 'Yhtets palvelimeen on katkennut, tee lainaus uudelleen'
+            title = 'Auton kuvan lataaminen ei onnistunut'
+            text = 'Jos mitään tietoja ei tullut näkyviin, ota yhteys henkilökuntaan'
             detailedText = str(e)
-            self.ui.okPushButton.setDisabled(True)
-            # TODO: Muuta kursorin muoto
             self.openWarning(title, text, detailedText)
 
 

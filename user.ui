@@ -142,10 +142,10 @@
    <widget class="QLabel" name="clockPictureLabel">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>550</y>
-      <width>140</width>
-      <height>140</height>
+      <x>350</x>
+      <y>600</y>
+      <width>111</width>
+      <height>91</height>
      </rect>
     </property>
     <property name="text">
@@ -153,6 +153,9 @@
     </property>
     <property name="pixmap">
      <pixmap resource="userUiRescources.qrc">:/pictures/uiPictrues/clock.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
     </property>
     <property name="alignment">
      <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -219,9 +222,9 @@
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>540</y>
-      <width>171</width>
-      <height>151</height>
+      <y>600</y>
+      <width>111</width>
+      <height>91</height>
      </rect>
     </property>
     <property name="text">
@@ -229,6 +232,9 @@
     </property>
     <property name="pixmap">
      <pixmap resource="userUiRescources.qrc">:/pictures/uiPictrues/calender.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="dateLabel">
@@ -472,7 +478,7 @@
    <widget class="QPlainTextEdit" name="freeCarPlainTextEdit">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>280</x>
       <y>110</y>
       <width>271</width>
       <height>641</height>
@@ -505,7 +511,7 @@ ABC-123 VW Transporter 3 henkilöä</string>
    <widget class="QPlainTextEdit" name="drivingCarPlainTextEdit">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>10</x>
       <y>110</y>
       <width>261</width>
       <height>641</height>
@@ -558,6 +564,31 @@ border-color: rgb(75, 188, 197);</string>
       <width>70</width>
       <height>70</height>
      </size>
+    </property>
+   </widget>
+   <widget class="QLabel" name="carPicturesLabel">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>400</y>
+      <width>311</width>
+      <height>181</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../../../../Pictures/OXZ915.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="wordWrap">
+     <bool>false</bool>
+    </property>
+    <property name="openExternalLinks">
+     <bool>false</bool>
     </property>
    </widget>
   </widget>
