@@ -288,7 +288,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             row = resultSet[0]
             picture = {row[0]} # PNG tai JPG kuva tietokannasta
             print('Kuva on', picture)
-            pixmap = QPixmap(picture)
+
+            # BUG: Ei toimi, lataa kuvan binäärimuodossa mutta ei muunna kuvaa
+            pixmap = QPixmap(picture) # Muunetaan rasteriksi
             self.ui.carPicturesLabel.setPixmap(pixmap)
 
         except Exception as e:
