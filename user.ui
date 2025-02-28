@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>555</width>
+    <width>635</width>
     <height>861</height>
    </rect>
   </property>
@@ -324,9 +324,9 @@
    <widget class="QLabel" name="carInfoLabel">
     <property name="geometry">
      <rect>
-      <x>340</x>
+      <x>300</x>
       <y>340</y>
-      <width>161</width>
+      <width>241</width>
       <height>81</height>
      </rect>
     </property>
@@ -433,7 +433,7 @@
    <widget class="QLabel" name="freeCarLabel">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>80</x>
       <y>80</y>
       <width>151</width>
       <height>31</height>
@@ -457,7 +457,7 @@
    <widget class="QLabel" name="drivingCarLabel">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>440</x>
       <y>80</y>
       <width>81</width>
       <height>31</height>
@@ -475,12 +475,63 @@
      <string>Ajossa</string>
     </property>
    </widget>
+   <widget class="QCheckBox" name="soundCheckBox">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>10</y>
+      <width>91</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 57, 122);</string>
+    </property>
+    <property name="text">
+     <string>CheckBox</string>
+    </property>
+    <property name="icon">
+     <iconset resource="userUiRescources.qrc">
+      <normaloff>:/pictures/uiPictrues/soundsOn.png</normaloff>:/pictures/uiPictrues/soundsOn.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>70</width>
+      <height>70</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QLabel" name="carPicturesLabel">
+    <property name="geometry">
+     <rect>
+      <x>-10</x>
+      <y>410</y>
+      <width>311</width>
+      <height>181</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../../../../Pictures/OXZ915.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="wordWrap">
+     <bool>false</bool>
+    </property>
+    <property name="openExternalLinks">
+     <bool>false</bool>
+    </property>
+   </widget>
    <widget class="QPlainTextEdit" name="freeCarPlainTextEdit">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>110</y>
-      <width>271</width>
+      <x>10</x>
+      <y>120</y>
+      <width>311</width>
       <height>641</height>
      </rect>
     </property>
@@ -511,9 +562,9 @@ ABC-123 VW Transporter 3 henkilöä</string>
    <widget class="QPlainTextEdit" name="drivingCarPlainTextEdit">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>110</y>
-      <width>261</width>
+      <x>320</x>
+      <y>120</y>
+      <width>311</width>
       <height>641</height>
      </rect>
     </property>
@@ -540,64 +591,13 @@ border-color: rgb(75, 188, 197);</string>
 </string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="soundCheckBox">
-    <property name="geometry">
-     <rect>
-      <x>450</x>
-      <y>10</y>
-      <width>91</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(0, 57, 122);</string>
-    </property>
-    <property name="text">
-     <string>CheckBox</string>
-    </property>
-    <property name="icon">
-     <iconset resource="userUiRescources.qrc">
-      <normaloff>:/pictures/uiPictrues/soundsOn.png</normaloff>:/pictures/uiPictrues/soundsOn.png</iconset>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>70</width>
-      <height>70</height>
-     </size>
-    </property>
-   </widget>
-   <widget class="QLabel" name="carPicturesLabel">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>400</y>
-      <width>311</width>
-      <height>181</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>../../../../Pictures/OXZ915.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-    <property name="wordWrap">
-     <bool>false</bool>
-    </property>
-    <property name="openExternalLinks">
-     <bool>false</bool>
-    </property>
-   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>555</width>
+     <width>635</width>
      <height>33</height>
     </rect>
    </property>

@@ -10,7 +10,7 @@ import json # JSON-tiedostojen käsittely
 
 from PySide6 import QtWidgets # Qt-vimpaimet
 from PySide6.QtCore import QThreadPool, Slot, Qt # Säikeistys, slot-dekoraattori ja Qt
-from PySide6.QtGui import QPixmap # Pixmap mahdollisuus
+from PySide6.QtGui import QPixmap, QCursor # Pixmap mahdollisuus
 
 from lendingModules import sound # Äänitoiminnot
 from lendingModules import dbOperations # Tietokantatoiminnot
@@ -126,6 +126,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.freeCarPlainTextEdit.show()
         self.ui.drivingCarLabel.show()
         self.ui.drivingCarPlainTextEdit.show()
+        self.ui.okPushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.ui.okPushButton.setEnabled(True)
         self.ui.carPicturesLabel.hide()
 
@@ -137,7 +138,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         try:
             # Luodaan tietokantayhteys-olio
             dbConnection = dbOperations.DbConnection(dbSettings)
-            inUseVehicles = dbConnection.readAllColumnsFromTable('ajossa')
+            inUseVehicles = dbConnection.readAllColumnsFromTable('ajosa')
             
             # Muodostetaan luettelo vapaista autoista createCatalog-metodilla
             catalogData = self.createCatalog(inUseVehicles)
@@ -238,7 +239,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.playSoundInTread('readKey.wav')
 
         # Päivitetään auton tiedot
-        # TODO: Lisätään tähän auton kuvan lataus tietokannasta
         # Tietokanta-asetukset
         dbSettings = self.currentSettings
         plainTextPassword = self.plainTextPassword
@@ -249,7 +249,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             # Luodaan tietokanta yhteys-olio
             dbConnection = dbOperations.DbConnection(dbSettings)
             criteria = f"rekisterinumero = '{self.ui.keysLineEdit.text()}'"
-            resultSet = dbConnection.filterColumsFromTable('auto', ['merkki', 'malli', 'henkilomaara'], criteria)
+            resultSet = dbConnection.filterColumsFromTable('vapaana', ['merkki', 'malli', 'henkilomaara'], criteria)
             row = resultSet[0]
             carData = f'{row[0]} {row[1]} \n {row[2]}-paikkainen'
             self.ui.carInfoLabel.setText(carData)
@@ -259,6 +259,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             text = 'Auton palautus edellisestä ajosta tekemättä, ota yhteys henkilökuntaan'
             detailedText = str(e)
             self.openWarning(title, text, detailedText)
+
+            # Muuta kursorin muoto
+            self.ui.okPushButton.setCursor(QCursor(Qt.CursorShape.ForbiddenCursor))
+
+            # Otetaan painike pois käytöstä, muuttaa kursorin oletuskursoriksi
+            self.ui.okPushButton.setDisabled(True)
+            self.openWarning(title, text, detailedText)
+
+            # Muutetaan tilarivin teksti
+            self.ui.statusbar.showMessage(title)
 
         try:
             dbConnection = dbOperations.DbConnection(dbSettings)
@@ -277,27 +287,27 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             detailedText = str(e)
             self.openWarning(title, text, detailedText)
 
-
         try:
-            # Luodaan tietokanta yhteys-olio
+            #Luodaan tietokantayhteys-olio
             dbConnection = dbOperations.DbConnection(dbSettings)
             criteria = f"rekisterinumero = '{self.ui.keysLineEdit.text()}'"
 
             # Haetaan auton kuva auto-taulusta
             resultSet = dbConnection.filterColumsFromTable('auto', ['kuva'], criteria)
             row = resultSet[0]
-            picture = {row[0]} # PNG tai JPG kuva tietokannasta
-            print('Kuva on', picture)
+            picture = row[0] # PNG tai JPG kuva tietokannasta
 
-            # BUG: Ei toimi, lataa kuvan binäärimuodossa mutta ei muunna kuvaa
-            pixmap = QPixmap(picture) # Muunetaan rasteriksi
+            with open('currentCar.png', 'wb') as temporeryFile:
+                temporeryFile.write(picture)
+
+            pixmap = QPixmap('currentCar.png')
             self.ui.carPicturesLabel.setPixmap(pixmap)
 
         except Exception as e:
             title = 'Auton kuvan lataaminen ei onnistunut'
             text = 'Jos mitään tietoja ei tullut näkyviin, ota yhteys henkilökuntaan'
             detailedText = str(e)
-            self.openWarning(title, text, detailedText)
+            self.openWarning(title,text,detailedText)
 
 
     @Slot()
@@ -350,8 +360,20 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     # Kumoa painikkeen painamisen jälkeen palataan alkunäkymään
     def returnStart(self):
+        # Tallenetaan palautus
+        # Luetaan tietokanta-asetukset paikallisiin muutujiin
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword # Vaihdetaan selväkieliseksi
+        dbConnection = dbOperations.DbConnection(dbSettings)
+        criteria = f"'{self.ui.keysReturnLineEdit.text()}'" # Tekstiä -> lisää ':t
+
+        dbConnection.modifyTableData('lainaus', 'palautus', 'CURRENT_TIMESTAMP', 'rekisterinumero', criteria)
+
+        self.ui.statusbar.showMessage('Auto palautettu')
         self.setInitialElements()
-        self.ui.statusbar.showMessage('Palattu alkunäkymään',5000)
+        if self.ui.soundCheckBox.isChecked():
+            self.playSoundInTread('returnOk.wav')
 
     def goBack(self):
         self.setInitialElements()
@@ -369,13 +391,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         """
 
         # Määritellään vapaana olevien autojen tiedot draivingCarPlainTextEdit-elementtiin
-        catalog = ''
+        catalogData = ''
         rowText = ''
 
         for vehiclTtuple in tupleList:
             rowData = ''
             for vehicleData in vehiclTtuple:
-                rowData = rowData + f'{vehicleData}'
+                rowData = rowData + f'{vehicleData} '
             rowText = rowData + f'{suffix}\n'
             catalogData = catalogData + rowText
         return catalogData

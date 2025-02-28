@@ -1,4 +1,4 @@
- SELECT rekisterinumero
+ SELECT rekisterinumero, merkki, malli, henkilomaara
    FROM public.auto
   WHERE rekisterinumero NOT IN ( 
 	 SELECT rekisterinumero

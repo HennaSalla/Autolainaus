@@ -145,6 +145,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.groupComboBox.clear()
         self.ui.groupComboBox.addItems(groupStringList)
 
+
         # Tehdään lista ajoneuvotyypit-yhdistelmäruudun arvoista
         # Luodaan tietokanta yhteys-olio
         dbConnection = dbOperations.DbConnection(dbSettings)
@@ -244,6 +245,34 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 # Muutetaan merkkijonoksi ja QTableWidgetItem-olioksi
                 data = QtWidgets.QTableWidgetItem(str(tableData[row][column])) 
                 self.ui.savedGroupsTableWidget.setItem(row, column, data)
+
+    def updateDiaryTableWidget(self):
+        # Luetaan tietokanta-asetukset paikallisiin muuttujiin
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword # Vaihdetaan selväkieliseksi 
+
+        # Luodaan tietokantayhteys-olio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Tehdään lista auto taulun tiedoista
+        tableData = dbConnection.readAllColumnsFromTable('ajopaivakirja')
+
+        # Tyhjenetään vanhat tiedot käyttöliitymästä ennen uusien lukemista
+        self.ui.diaryTableWidget.clearContents()
+
+        # Määritellään taulukkoelementin otsikot
+        headerRow = ['Rekisteri', 'Merkki', 'HeTu', 'Sukunimi', 'Etunimi', 'Ryhmä', 'Otettu', 'Palautettu']
+        self.ui.diaryTableWidget.setHorizontalHeaderLabels(headerRow)
+
+        # Asetetaan taulukon solujen arvot
+        for row in range(len(tableData)): # Luetaan listaa riveittäin
+            for column in range(len(tableData[row])): # Luetaan monikkoa sarakkeittain
+                
+                # Muutetaan merkkijonoksi ja QTableWidgetItem-olioksi
+                data = QtWidgets.QTableWidgetItem(str(tableData[row][column])) 
+                self.ui.vehicleCatalogTableWidget.setItem(row, column, data)
+
 
 
 
@@ -351,9 +380,22 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Kutsutaan tallennusmetodia
         try:
             dbConnection.addToTable(tableName, vehicleDictionary)
-            self.refreshUi()
+
         except Exception as e:
             self.openWarning('Tallennus ei onnistunut', str(e))
+        
+        # Luetaan kuvatiedostoa ja päivitetään autotaulua
+        with open(self.vehiclePicture, 'rb') as pictureFile:
+            pictureData = pictureFile.read()
+        
+        # Luodaan uusi yhteys, koska edellinen suljettiin
+        dbConnection2 = dbOperations.DbConnection(dbSettings)
+
+        try:
+            dbConnection2.updateBinaryField('auto', 'kuva', 'rekisterinumero', f"'{numberPlate}'", pictureData)
+            self.refreshUi()
+        except Exception as e:
+            self.openWarning('Kuvan päivitys ei onnistunut', str(e))
 
     def deleteVehicle(self):
         # Määritellään tietokanta-asetukset
@@ -366,10 +408,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Kutsutaan postpmetodia
         try:
-            dbConnection.deleteRowsFromTable('auto', 'rekisteinumero', f"'{self.vehicleToDelete}")
+            dbConnection.deleteRowsFromTable('auto', 'rekisterinumero', f"'{self.vehicleToDelete}'")
             self.refreshUi()
         except Exception as e:
-            self.openWarning('Tallenus ei onnistunut', str(e))
+            self.openWarning('Poisto ei onnistunut', str(e))
 
     # Taulukoiden soluvalinnat
     # ------------------------
@@ -381,9 +423,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Haetaan aktiivisen rivin numero ja ensimäisen sarakeen arvo siltä riviltä
         rowIndex = self.ui.vehicleCatalogTableWidget.currentRow()
-        cellValue = self.ui.vehicleCatalogTableWidget.itemAt(rowIndex, columnIdex).text()
+        cellValue = self.ui.vehicleCatalogTableWidget.item(rowIndex, columnIdex).text()
         self.vehicleToDelete = cellValue
         self.ui.statusbar.showMessage(f'Valitun auton rekisterinumero on {cellValue}')
+        self.ui.deleteVehiclePusButton.setEnabled(True)
 
 
 
@@ -508,7 +551,7 @@ class AboutDialog(QtWidgets.QDialog, About_Dialog):
         super().__init__()
 
         # Luodaan käyttöliittymä konvertoidun tiedoston perusteella MainWindow:n ui-ominaisuudeksi. Tämä suojaa lopun MainWindow-olion ylikirjoitukselta, kun ui-tiedostoa päivitetään
-        self.ui =About_Dialog()
+        self.ui = About_Dialog()
 
         # Kutsutaan käyttöliittymän muodostusmetodia setupUi
         self.ui.setupUi(self)

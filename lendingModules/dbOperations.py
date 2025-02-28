@@ -1,3 +1,4 @@
+
 """A module to connect to a PostgreSQL database and do basic CRUD-operations (Create, Read, Update and Delete)
 """
 # MODUULI POSTGRESQL TIETOKANTAPALVELIMEN KÄYTTÄMISEEN
@@ -328,10 +329,10 @@ class DbConnection():
             # Luodaan kursori suorittamaan tietokantoperaatiota
             cursor = currentConnection.cursor()
 
-            # Määritellään lopullinen SQL-lause
+            # Määritellään lopullinen SQL-lause, paikkamerkki %s korvautuu binääritiedolla
             sqlClause = f'UPDATE {table} SET  {column} = %s WHERE {criteriaColumn} = {criteriaValue}'
             print(sqlClause)
-            # Suoritetaan SQL-lause
+            # Suoritetaan SQL-lause ja lisätään data monikkona
             cursor.execute(sqlClause, (data,))
 
             # Vahvistetaan tapahtuma (transaction)
@@ -350,7 +351,6 @@ class DbConnection():
 
     # Metodi tietueen poistamiseen
     def deleteRowsFromTable(self, table, criteriaColumn, criteriaValue):
-        # Yritetään avata yhteys tietokantaan ja päivittää tietueita
         try:
             # Luodaan yhteys tietokantaan
             currentConnection = psycopg2.connect(self.connectionString)
@@ -358,10 +358,10 @@ class DbConnection():
             # Luodaan kursori suorittamaan tietokantoperaatiota
             cursor = currentConnection.cursor()
 
-            # Määritellään lopullinen SQL-lause
+            # Määritellään lopullinen SQL-lause, paikkamerkki %s korvautuu binääritiedolla
             sqlClause = f'DELETE FROM {table} WHERE {criteriaColumn} = {criteriaValue}'
             print(sqlClause)
-            # Suoritetaan SQL-lause
+            # Suoritetaan SQL-lause ja lisätään data monikkona
             cursor.execute(sqlClause)
 
             # Vahvistetaan tapahtuma (transaction)
@@ -376,7 +376,6 @@ class DbConnection():
             if currentConnection:
                 cursor.close() # Tuhotaan kursori
                 currentConnection.close() # Tuhotaan yhteys
-
         
 if __name__ == "__main__":
 
