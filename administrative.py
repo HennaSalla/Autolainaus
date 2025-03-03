@@ -16,7 +16,7 @@ from PySide6 import QtGui # Pixmap-muutoksia varten
 
 # Käyttöliittymämoduulien lataukset
 from administrative_ui import Ui_MainWindow # Käännetyn käyttöliittymän luokka
-from settingsDialog_ui import Ui_Dialog as Settings_Dialog# Asetukset-dialogin luokka
+from settingsDialog_ui import Ui_Dialog as Settings_Dialog # Asetukset-dialogin luokka
 from aboutDialog_ui import Ui_Dialog as About_Dialog
 
 # Omat moduulit
@@ -66,6 +66,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.vehiclePicture = 'uiPictrues\\noPicture.png'
         # Poistettavan auton rekisterinumero
         self.vehicleToDelete = ''
+        self.personToDelete = ''
+        self.groupToDelete = ''
 
         # OHJELMOIDUT SIGNAALIT
         # ---------------------
@@ -85,10 +87,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.saveVehiclePushButton.clicked.connect(self.saveVehicle)
         self.ui.openPicturePushButton.clicked.connect(self.openPicture)
         self.ui.deleteVehiclePusButton.clicked.connect(self.deleteVehicle)
+        self.ui.deletePersonPushButton.clicked.connect(self.deletePerson)
+        self.ui.deleteGroupPushButton.clicked.connect(self.deleteGroup)
 
 
         # Taulukko soluvalinnat
         self.ui.vehicleCatalogTableWidget.cellClicked.connect(self.setRegisterNumber)
+        self.ui.registeredPersonsTableWidget.cellClicked.connect(self.setSNN)
+        self.ui.savedGroupsTableWidget.cellClicked.connect(self.setGroup)
         
     # OHJELMOIDUT SLOTIT
     # ==================
@@ -120,7 +126,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.updateLenderTableWidget() # Lainaajien tiedot
         self.updateVehicleTableWidget() # Autojen tiedot
         self.updateGroupTableWidget() # Ryhmien tiedot
+        self.updateDiaryTableWidget() # Ajopäiväkirja
         self.ui.deleteVehiclePusButton.setEnabled(False) # Otetaan auton poisto-painike pois käytöstä
+        self.ui.deleteGroupPushButton.setEnabled(False) # Lainaajan poisto-painike
+        self.ui.deletePersonPushButton.setEnabled(False) # Ryhmän poisto-painike
 
     # Välilehtien slotit
     # ------------------
@@ -159,25 +168,28 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.vehicleTypeComboBox.clear()
         self.ui.vehicleTypeComboBox.addItems(groupStringList)
 
+        # Lista ajopäiväkirjoista -> raporttinäkymien nimet
+        self.ui.reportTypecomboBox.addItem('Ajopäiväkirja -kaikki')
+
 
     # Lainaajat-taulukon päivitys
     def updateLenderTableWidget(self):
         # Luetaan tietokanta-asetukset paikallisiin muuttujiin
         dbSettings = self.currentSettings
         plainTextPassword = self.plainTextPassword
-        dbSettings['password'] = plainTextPassword # Vaihdetaan selväkieliseksi 
+        dbSettings['password'] = plainTextPassword # Vaidetaan selväkieliseksi
 
         # Luodaan tietokantayhteys-olio
         dbConnection = dbOperations.DbConnection(dbSettings)
 
-        # Tehdään lista lainaaja taulun tiedoista
+        # Tehdään lista lainaaja-taulun tiedoista
         tableData = dbConnection.readAllColumnsFromTable('lainaaja')
-
-        # Tyhjenetään vanhat tiedot käyttöliitymästä ennen uusien lukemista
+        
+        # Tyhjennetään vanhat tiedot käyttöliittymästä ennen uusien lukemista tietokannasta
         self.ui.registeredPersonsTableWidget.clearContents()
 
         # Määritellään taulukkoelementin otsikot
-        headerRow = ['Henkilötunnus', 'Sähköposti', 'Etunimi', 'Sukunimi', 'Ryhmä', 'Ajokortti']
+        headerRow = ['Henkilötunnus', 'Etunimi', 'Sukunimi', 'Ryhmä', 'Ajokortti', 'sähköposti']
         self.ui.registeredPersonsTableWidget.setHorizontalHeaderLabels(headerRow)
 
         # Asetetaan taulukon solujen arvot
@@ -246,19 +258,20 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 data = QtWidgets.QTableWidgetItem(str(tableData[row][column])) 
                 self.ui.savedGroupsTableWidget.setItem(row, column, data)
 
+    # Päivitetään ajopäiväkirjan taulukko
     def updateDiaryTableWidget(self):
-        # Luetaan tietokanta-asetukset paikallisiin muuttujiin
+         # Luetaan tietokanta-asetukset paikallisiin muuttujiin
         dbSettings = self.currentSettings
         plainTextPassword = self.plainTextPassword
-        dbSettings['password'] = plainTextPassword # Vaihdetaan selväkieliseksi 
+        dbSettings['password'] = plainTextPassword # Vaidetaan selväkieliseksi
 
         # Luodaan tietokantayhteys-olio
         dbConnection = dbOperations.DbConnection(dbSettings)
 
-        # Tehdään lista auto taulun tiedoista
+        # Tehdään lista lainaaja-taulun tiedoista
         tableData = dbConnection.readAllColumnsFromTable('ajopaivakirja')
-
-        # Tyhjenetään vanhat tiedot käyttöliitymästä ennen uusien lukemista
+        
+        # Tyhjennetään vanhat tiedot käyttöliittymästä ennen uusien lukemista tietokannasta
         self.ui.diaryTableWidget.clearContents()
 
         # Määritellään taulukkoelementin otsikot
@@ -271,7 +284,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 
                 # Muutetaan merkkijonoksi ja QTableWidgetItem-olioksi
                 data = QtWidgets.QTableWidgetItem(str(tableData[row][column])) 
-                self.ui.vehicleCatalogTableWidget.setItem(row, column, data)
+                self.ui.diaryTableWidget.setItem(row, column, data)
 
 
 
@@ -402,13 +415,48 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         dbSettings = self.currentSettings
         plainTextPassword = self.plainTextPassword
         dbSettings['password'] = plainTextPassword
-
-        # Luodaan tietokanta yhteys olio
+        # Luodaan tietokantayhteys-olio
+    
         dbConnection = dbOperations.DbConnection(dbSettings)
 
-        # Kutsutaan postpmetodia
+        # Kutsutaan tallennusmetodia
+
         try:
             dbConnection.deleteRowsFromTable('auto', 'rekisterinumero', f"'{self.vehicleToDelete}'")
+            self.refreshUi()
+        except Exception as e:
+            self.openWarning('Poisto ei onnistunut', str(e))
+
+    def deletePerson(self):
+        # Määritellään tietokanta-asetukset
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword
+        # Luodaan tietokantayhteys-olio
+    
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Kutsutaan tallennusmetodia
+
+        try:
+            dbConnection.deleteRowsFromTable('lainaaja', 'hetu', f"'{self.personToDelete}'")
+            self.refreshUi()
+        except Exception as e:
+            self.openWarning('Poisto ei onnistunut', str(e))
+
+    def deleteGroup(self):
+        # Määritellään tietokanta-asetukset
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword
+        # Luodaan tietokantayhteys-olio
+    
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Kutsutaan tallennusmetodia
+
+        try:
+            dbConnection.deleteRowsFromTable('ryhma', 'ryhma', f"'{self.groupToDelete}'")
             self.refreshUi()
         except Exception as e:
             self.openWarning('Poisto ei onnistunut', str(e))
@@ -427,6 +475,30 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.vehicleToDelete = cellValue
         self.ui.statusbar.showMessage(f'Valitun auton rekisterinumero on {cellValue}')
         self.ui.deleteVehiclePusButton.setEnabled(True)
+
+    def setSNN(self):
+        rowIndex = 0
+        columnIndex = 0
+        cellValue = ''
+
+        # Haetaan aktiivisen solun rivinumero ja ensimmäisen sarakkeen arvo siltä riviltä
+        rowIndex = self.ui.registeredPersonsTableWidget.currentRow()
+        cellValue = self.ui.registeredPersonsTableWidget.item(rowIndex, columnIndex).text()
+        self.personToDelete = cellValue
+        self.ui.statusbar.showMessage(f'valitun käyttäjän henkilötunnus on {cellValue}')
+        self.ui.deletePersonPushButton.setEnabled(True)
+
+    def setGroup(self):
+        rowIndex = 0
+        columnIndex = 0
+        cellValue = ''
+
+        # Haetaan aktiivisen solun rivinumero ja ensimmäisen sarakkeen arvo siltä riviltä
+        rowIndex = self.ui.savedGroupsTableWidget.currentRow()
+        cellValue = self.ui.savedGroupsTableWidget.item(rowIndex, columnIndex).text()
+        self.groupToDelete = cellValue
+        self.ui.statusbar.showMessage(f'valitun ryhmän nimi on {cellValue}')
+        self.ui.deleteGroupPushButton.setEnabled(True)
 
 
 
