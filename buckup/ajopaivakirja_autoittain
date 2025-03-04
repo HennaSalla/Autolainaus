@@ -1,0 +1,3 @@
+SELECT auto.rekisterinumero, merkki, malli, lainaaja.hetu, sukunimi, etunimi, lainausaika, palautus
+FROM public.auto INNER JOIN public.lainaus ON auto.rekisterinumero = lainaus.rekisterinumero IMMER JOIN public.lainaaja ON lainaus.hetu = lainaaja.hetu
+ORDER BY auto.rekisterinumero, lainausaika DESC;
